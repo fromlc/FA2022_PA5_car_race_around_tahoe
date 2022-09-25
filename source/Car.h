@@ -25,7 +25,7 @@ private:
 public:
 	// constructors
 	Car();
-	Car(const string& year, const string& make, const string& model);
+	Car(const string&& year, const string&& make, const string&& model);
 
 	// causes Odomether mileage and FuelGauge gallonsLeft to change
 	float drive(float miles);

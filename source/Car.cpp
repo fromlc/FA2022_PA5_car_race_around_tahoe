@@ -19,7 +19,7 @@ Car::Car() : Car("2022", "Kia", "Rio") {}
 //------------------------------------------------------------------------------
 // constructor
 //------------------------------------------------------------------------------
-Car::Car(const string& year, const string& make, const string& model) {
+Car::Car(const string&& year, const string&& make, const string&& model) {
 	this->year = year;
 	this->make = make;
 	this->model = model;
