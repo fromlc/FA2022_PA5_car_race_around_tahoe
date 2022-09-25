@@ -7,9 +7,15 @@
 
 #include "Car.h"
 
+//------------------------------------------------------------------------------
+// constants
+//------------------------------------------------------------------------------
 constexpr float DRIVE_MILES = 10;
 constexpr float ADD_GALLONS = 1;
 
+//------------------------------------------------------------------------------
+// using symbols
+//------------------------------------------------------------------------------
 using std::cout;
 using std::fixed;
 using std::setprecision;
@@ -49,7 +55,7 @@ int main() {
 
 	for (int i = 0; i < times; i++) {
 		driven = c.drive(DRIVE_MILES);
-		cout << i << ": Driving " << g_scenery[i] << ": " << driven << " miles.\n";
+		cout << i+1 << ": Driving " << g_scenery[i] << ": " << driven << " miles.\n";
 		
 		totalMiles += driven;
 	}
