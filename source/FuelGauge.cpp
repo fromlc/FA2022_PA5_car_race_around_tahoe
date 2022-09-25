@@ -42,9 +42,15 @@ float FuelGauge::fillUp() {
 // add fuel, return how many gallons added
 //------------------------------------------------------------------------------
 float FuelGauge::addGallons(float gallons) {
-	float g = -((TANK_CAPACITY - (gallonsLeft + gallons)) - TANK_CAPACITY);
-	gallonsLeft += g;
-	return g;
+	float canAddGallons = TANK_CAPACITY - gallonsLeft;
+
+	if (canAddGallons >= gallons) {
+		gallonsLeft += gallons;
+		return gallons;
+	}
+
+	gallonsLeft += canAddGallons;
+	return canAddGallons;
 }
 
 //------------------------------------------------------------------------------
