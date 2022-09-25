@@ -16,6 +16,14 @@ using std::setprecision;
 using std::showpoint;
 
 //------------------------------------------------------------------------------
+// globals
+//------------------------------------------------------------------------------
+string g_scenery[] = {
+	"Stage 1", "Stage 2", "Stage 3", "Stage 4", "Stage 5",
+	"Stage 6", "Stage 7", "Stage 8", "Stage 9", "Stage 10",
+};
+
+//------------------------------------------------------------------------------
 // entry point
 //------------------------------------------------------------------------------
 int main() {
@@ -23,7 +31,7 @@ int main() {
 	c.print();
 
 	// set numeric display format
-	cout << setprecision(5) << fixed << showpoint;
+	cout << setprecision(1) << fixed << showpoint;
 
 	// gas 'er up
 	float gallonsAdded = c.fillUp();
@@ -34,19 +42,21 @@ int main() {
 	cout << "Added " << gallonsAdded << " gallons.\n";
 
 	// loop setup
+	cout << "Let's drive!\n\n";
 	float driven;
 	float totalMiles = 0;
-	int loopCount = 0;
-	cout << "Let's drive!\n\n";
+	int times = sizeof(g_scenery) / sizeof(string);
 
-	while ((driven = c.drive(DRIVE_MILES)) > 0) {
-		cout << ++loopCount << ": Driving " << driven << " miles.\n";
+	for (int i = 0; i < times; i++) {
+		driven = c.drive(DRIVE_MILES);
+		cout << i << ": Driving " << g_scenery[i] << ": " << driven << " miles.\n";
 		
 		totalMiles += driven;
 	}
 
 	cout << "\nDrove " << totalMiles << " miles.\n";
-	cout << "Ran out of gas!\n";
+	cout << "Gallons of gas left: " << c.readFuelGauge() << "\n";
+	cout << "Miles left in this tank: " << c.canDriveMiles() << "\n";
 
 	return 0;
 }

@@ -51,6 +51,16 @@ float Car::addFuel(float gallons) {
 }
 
 //------------------------------------------------------------------------------
+// returns number of fuel gallons remaining
+//------------------------------------------------------------------------------
+float Car::readFuelGauge() { return fg.getGallonsLeft(); }
+
+//------------------------------------------------------------------------------
+// returns number of miles remaining given fuel level
+//------------------------------------------------------------------------------
+float Car::canDriveMiles() { return fg.canDriveMiles(); }
+
+//------------------------------------------------------------------------------
 // pretty print year, make, model, odometer reading, fuel level, MPG
 //------------------------------------------------------------------------------
 void Car::print() {

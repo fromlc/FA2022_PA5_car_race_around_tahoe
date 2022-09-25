@@ -36,6 +36,12 @@ public:
 	// returns number of gallons actually added
 	float addFuel(float gallons);
 
+	// returns number of gallons remaining
+	float readFuelGauge();
+
+	// returns number of miles remaining given fuel level
+	float canDriveMiles();
+
 	// pretty print year, make, model, odometer reading, fuel level, MPG
 	void print();
 };
