@@ -40,20 +40,27 @@ float Car::addFuel(float gallons) {
 }
 
 //------------------------------------------------------------------------------
+// returns number of miles on odometer
+//------------------------------------------------------------------------------
+float Car::getMilesDriven() const {
+	return odo.getMilesDriven();
+}
+
+//------------------------------------------------------------------------------
 // returns number of fuel gallons remaining
 //------------------------------------------------------------------------------
-float Car::readFuelGauge() { return fg.getGallonsLeft(); }
+float Car::readFuelGauge() const { return fg.getGallonsLeft(); }
 
 //------------------------------------------------------------------------------
 // returns number of miles remaining given fuel level
 //------------------------------------------------------------------------------
-float Car::canDriveMiles() { return fg.canDriveMiles(); }
+float Car::canDriveMiles() const { return fg.canDriveMiles(); }
 
 //------------------------------------------------------------------------------
 // pretty print year, make, model, odometer reading, fuel level, MPG
 //------------------------------------------------------------------------------
-void Car::print() {
-	cout << "\n" << year << " " << make << " " << model << "\n";
+void Car::print() const {
+	cout << year << " " << make << " " << model;
 }
 
 

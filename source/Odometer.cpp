@@ -16,7 +16,7 @@ Odometer::Odometer(float initialMiles) { milesDriven = initialMiles; }
 //------------------------------------------------------------------------------
 // returns odometer reading (number of miles driven)
 //------------------------------------------------------------------------------
-float Odometer::getMilesDriven() { return milesDriven; }
+float Odometer::getMilesDriven() const { return milesDriven; }
 
 //------------------------------------------------------------------------------
 // adds miles to the odometer reading (number of miles driven)

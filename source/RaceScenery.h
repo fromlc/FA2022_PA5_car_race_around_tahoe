@@ -60,7 +60,7 @@ public:
 	// return reference to next checkpoint description
 	//--------------------------------------------------------------------------
 	int getSceneCount() {
-		return scenery.size();
+		return (int) scenery.size();
 	}
 
 	//--------------------------------------------------------------------------

@@ -27,6 +27,9 @@ public:
 	Car();
 	Car(const string& year, const string& make, const string& model);
 
+	// getters
+	float getMilesDriven() const;
+
 	//----------------------------------------------------------------------
 	// causes Odomether mileage and FuelGauge gallonsLeft to change
 	// derived classes must implement this method
@@ -40,13 +43,13 @@ public:
 	float addFuel(float gallons);
 
 	// returns number of gallons remaining
-	float readFuelGauge();
+	float readFuelGauge() const;
 
 	// returns number of miles remaining given fuel level
-	float canDriveMiles();
+	float canDriveMiles() const;
 
 	// pretty print year, make, model, odometer reading, fuel level, MPG
-	void print();
+	void print() const;
 };
 #endif	// CAR_H
 

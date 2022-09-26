@@ -17,7 +17,7 @@ public:
 	Odometer(float initialMiles);
 
 	// getters
-	float getMilesDriven();
+	float getMilesDriven() const;
 
 	// setters
 	void addMilesDriven(float miles);

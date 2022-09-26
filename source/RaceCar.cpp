@@ -26,6 +26,8 @@ RaceCar::RaceCar(const string& year, const string& make, const string& model) :
 
 	srand((unsigned int) time(0));
 	speed = rand() % (MAX_SPEED - MIN_SPEED) + MIN_SPEED;
+	speedLog.push_back(speed);
+	crash = false;
 }
 
 //------------------------------------------------------------------------------
@@ -45,6 +47,7 @@ float RaceCar::drive(float miles) {
 //------------------------------------------------------------------------------
 void RaceCar::setSpeed(int speed) {
 	this->speed = speed;
+	speedLog.push_back(speed);
 }
 
 //------------------------------------------------------------------------------
@@ -53,6 +56,7 @@ void RaceCar::setSpeed(int speed) {
 //------------------------------------------------------------------------------
 int RaceCar::setRandomSpeed(int minSpeed, int maxSpeed) {
 	speed = rand() % (maxSpeed - minSpeed) + minSpeed;
+	speedLog.push_back(speed);
 	return speed;
 }
 
@@ -61,4 +65,29 @@ int RaceCar::setRandomSpeed(int minSpeed, int maxSpeed) {
 //------------------------------------------------------------------------------
 int RaceCar::getSpeed() const {
 	return speed;
+}
+
+//------------------------------------------------------------------------------
+// sets crash flag
+//------------------------------------------------------------------------------
+void RaceCar::setCrash() {
+	crash = true;
+}
+
+//------------------------------------------------------------------------------
+// returns crash flag
+//------------------------------------------------------------------------------
+bool RaceCar::getCrash() const {
+	return crash;
+}
+
+//------------------------------------------------------------------------------
+// returns average speed
+//------------------------------------------------------------------------------
+float RaceCar::getAverageSpeed() {
+	int accumulateSpeed = 0;
+	for (int s : speedLog) {
+		accumulateSpeed += s;
+	}
+	return (float) accumulateSpeed / (float) speedLog.size();
 }
