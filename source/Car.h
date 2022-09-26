@@ -15,7 +15,7 @@ using std::string;
 // Car
 //----------------------------------------------------------------------
 class Car {
-private:
+protected:
 	string make;
 	string model;
 	string year;
@@ -25,10 +25,10 @@ private:
 public:
 	// constructors
 	Car();
-	Car(const string&& year, const string&& make, const string&& model);
+	Car(const string& year, const string& make, const string& model);
 
 	// causes Odomether mileage and FuelGauge gallonsLeft to change
-	float drive(float miles);
+	virtual float drive(float miles) = 0;
 
 	// add enough fuel to fill up the tank, return gallons added
 	float fillUp();

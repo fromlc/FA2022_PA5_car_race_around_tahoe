@@ -1,60 +1,64 @@
 //------------------------------------------------------------------------------
-// Car : class definition
+// RaceCar : derived class definition
 //------------------------------------------------------------------------------
+#include <cstdlib>
 #include <iostream>
 #include <string>
 
 #include "Odometer.h"
 #include "FuelGauge.h"
-#include "Car.h"
+#include "RaceCar.h"
 
 using std::cout;
+using std::rand;
 using std::string;
 
 //------------------------------------------------------------------------------
 // default constructor
 //------------------------------------------------------------------------------
-Car::Car() : Car("2022", "Kia", "Rio") {}
+RaceCar::RaceCar() : RaceCar("2022", "Corvette", "Z-06") {}
 
 //------------------------------------------------------------------------------
 // constructor
 //------------------------------------------------------------------------------
-Car::Car(const string& year, const string& make, const string& model) {
-	this->year = year;
-	this->make = make;
-	this->model = model;
+RaceCar::RaceCar(const string& year, const string& make, const string& model) :
+	Car(year, make, model) {
+
+	srand((unsigned int) time(0));
+	speed = rand() % (MAX_SPEED - MIN_SPEED) + MIN_SPEED;
 }
 
 //------------------------------------------------------------------------------
-// add enough fuel to fill up the tank, return gallons added
+// causes Odomether mileage and FuelGauge gallonsLeft to change
+// returns miles actually driven given fuel remaining
 //------------------------------------------------------------------------------
-float Car::fillUp() {
-	return fg.fillUp();
+float RaceCar::drive(float miles) {
+	float driven = fg.driveMiles(miles);
+	odo.addMilesDriven(driven);
+
+	return driven;
 }
 
 //------------------------------------------------------------------------------
-// returns number of gallons actually added
+// set speed to passed value
+// returns miles actually driven given fuel remaining
 //------------------------------------------------------------------------------
-float Car::addFuel(float gallons) {
-	return fg.addGallons(gallons);
+void RaceCar::setSpeed(int speed) {
+	this->speed = speed;
 }
 
 //------------------------------------------------------------------------------
-// returns number of fuel gallons remaining
+// set speed to passed value
+// returns miles actually driven given fuel remaining
 //------------------------------------------------------------------------------
-float Car::readFuelGauge() { return fg.getGallonsLeft(); }
-
-//------------------------------------------------------------------------------
-// returns number of miles remaining given fuel level
-//------------------------------------------------------------------------------
-float Car::canDriveMiles() { return fg.canDriveMiles(); }
-
-//------------------------------------------------------------------------------
-// pretty print year, make, model, odometer reading, fuel level, MPG
-//------------------------------------------------------------------------------
-void Car::print() {
-	cout << "\n" << year << " " << make << " " << model << "\n";
+int RaceCar::setRandomSpeed(int minSpeed, int maxSpeed) {
+	speed = rand() % (maxSpeed - minSpeed) + minSpeed;
+	return speed;
 }
 
-
-
+//------------------------------------------------------------------------------
+// returns speed value
+//------------------------------------------------------------------------------
+int RaceCar::getSpeed() const {
+	return speed;
+}

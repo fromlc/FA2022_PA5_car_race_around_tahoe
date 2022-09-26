@@ -4,14 +4,19 @@
 #include <iomanip>
 #include <iostream>
 #include <string>
+#include <vector>
 
-#include "Car.h"
+#include "RaceCar.h"
 
 //------------------------------------------------------------------------------
 // constants
 //------------------------------------------------------------------------------
-constexpr float DRIVE_MILES = 10;
+constexpr int DRIVE_MILES = 10;
 constexpr float ADD_GALLONS = 1;
+
+constexpr int MIN_SPEED = 60;
+constexpr int MAX_SPEED = 80;
+constexpr int CRASH_FACTOR = 5;
 
 //------------------------------------------------------------------------------
 // using symbols
@@ -20,49 +25,83 @@ using std::cout;
 using std::fixed;
 using std::setprecision;
 using std::showpoint;
+using std::vector;
 
 //------------------------------------------------------------------------------
-// globals
+// local function prototypes
 //------------------------------------------------------------------------------
-string g_scenery[] = {
-	"Stage 1", "Stage 2", "Stage 3", "Stage 4", "Stage 5",
-	"Stage 6", "Stage 7", "Stage 8", "Stage 9", "Stage 10",
-};
+float race(RaceCar& rc);
 
 //------------------------------------------------------------------------------
 // entry point
 //------------------------------------------------------------------------------
 int main() {
-	Car c;
+	RaceCar c;
 	c.print();
 
 	// set numeric display format
 	cout << setprecision(1) << fixed << showpoint;
 
-	// gas 'er up
+	// gas up
 	float gallonsAdded = c.fillUp();
-	cout << "\nGassed up with " << gallonsAdded << " gallons.\n";
+	cout << "Gassed up with " << gallonsAdded << " gallons.\n";
+	cout << "Let's drive around Lake Tahoe!\n";
 
-	// add 1 gallon of fuel
-	gallonsAdded = c.addFuel(ADD_GALLONS);
-	cout << "Added " << gallonsAdded << " gallons.\n";
+	// let's drive!
+	float milesDriven = race(c);
 
-	// loop setup
-	cout << "Let's drive!\n\n";
-	float driven;
-	float totalMiles = 0;
-	int times = sizeof(g_scenery) / sizeof(string);
-
-	for (int i = 0; i < times; i++) {
-		driven = c.drive(DRIVE_MILES);
-		cout << i+1 << ": Driving " << g_scenery[i] << ": " << driven << " miles.\n";
-		
-		totalMiles += driven;
-	}
-
-	cout << "\nDrove " << totalMiles << " miles.\n";
-	cout << "Gallons of gas left: " << c.readFuelGauge() << "\n";
-	cout << "Miles left in this tank: " << c.canDriveMiles() << "\n";
+	cout << "\nDrove " << milesDriven << " miles.\n";
+	cout << "Fuel left: " << c.readFuelGauge() << " gallons.\n";
+	cout << "Miles left in this tank: " << c.canDriveMiles() << ".\n";
 
 	return 0;
 }
+
+//------------------------------------------------------------------------------
+// run the race loop
+//------------------------------------------------------------------------------
+float race(RaceCar& rc) {
+	float driven;
+	float totalMiles = 0;
+	int loopCount = 1;
+
+	vector<string> scenery = {
+		"Zephyr Cove",
+		"Fallen Leaf Lake",
+		"Rubicon Point",
+		"Sugar Pine Point",
+		"Tahoe City",
+		"Carnelian Bay",
+		"Crystal Bay",
+		"Sand Harbor",
+		"Thunderbird Lodge",
+		"Spooner Lake",
+	};
+
+	cout << "\nStarting at " << scenery.back() << "\n";
+
+	for (auto scene : scenery) {
+		driven = rc.drive(DRIVE_MILES);
+		int speed = rc.getSpeed();
+
+		cout << loopCount++ << ": Driving " << driven << " miles to "
+			<< scene << " at " << rc.getSpeed() << "mph\n";
+
+		if (speed > MAX_SPEED) {
+			cout << "CRASH!@! at " << speed << "mph\n";
+			totalMiles += (rand() % DRIVE_MILES);
+			break;
+		}
+		else {
+			totalMiles += driven;
+
+			// set speed for next stage
+			rc.setRandomSpeed(MIN_SPEED, MAX_SPEED + CRASH_FACTOR);
+		}
+	}
+
+	return totalMiles;
+}
+
+
+
