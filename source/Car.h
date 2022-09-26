@@ -27,7 +27,10 @@ public:
 	Car();
 	Car(const string& year, const string& make, const string& model);
 
+	//----------------------------------------------------------------------
 	// causes Odomether mileage and FuelGauge gallonsLeft to change
+	// derived classes must implement this method
+	//----------------------------------------------------------------------
 	virtual float drive(float miles) = 0;
 
 	// add enough fuel to fill up the tank, return gallons added
