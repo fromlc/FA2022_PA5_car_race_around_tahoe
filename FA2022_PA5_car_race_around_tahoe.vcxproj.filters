@@ -27,6 +27,9 @@
     <ClCompile Include="source\Odometer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="source\RaceCar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\Car.h">
@@ -36,6 +39,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="source\Odometer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\RaceCar.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\RaceScenery.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

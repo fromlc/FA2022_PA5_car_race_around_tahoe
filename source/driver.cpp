@@ -145,9 +145,10 @@ void race(RaceCar& rc1, RaceCar& rc2) {
 void declareWinner(RaceCar& rc1, RaceCar& rc2) {
 	cout << "\n";
 
-	// determine winner - most miles driven, no crash
-	if (rc1.getCrash() && rc2.getCrash())
+	// determine winner - fastest average speed with no crash
+	if (rc1.getCrash() && rc2.getCrash()) {
 		cout << "No winner - both cars crashed.\n";
+	}
 	else if (rc1.getCrash()) {
 		rc2.print();
 		cout << " won! The other car crashed.\n";
