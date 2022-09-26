@@ -94,9 +94,9 @@ void race(RaceCar& rc1, RaceCar& rc2) {
 			<< DRIVE_MILES << " miles to " << scene << "\n";
 
 		rc1.print();
-		cout << ": " << rc1.getSpeed() << "mph\n";
+		cout << ": " << rc1.getSpeed() << " mph\n";
 		rc2.print();
-		cout << ": " << rc2.getSpeed() << "mph\n";
+		cout << ": " << rc2.getSpeed() << " mph\n";
 		cout << "\n";
 
 		// crash flag
@@ -105,7 +105,7 @@ void race(RaceCar& rc1, RaceCar& rc2) {
 		// drive random miles to high speed crash
 		if (speed1 > MAX_SPEED) {
 			rc1.print();
-			cout << " CRASHED!@! at " << speed1 << "mph - "
+			cout << " CRASHED!@! at " << speed1 << " mph - "
 				<< scenery.getRandomCrash() << ".\n";
 
 			rc1.drive((float)(rand() % DRIVE_MILES));
@@ -119,7 +119,7 @@ void race(RaceCar& rc1, RaceCar& rc2) {
 		// drive random miles to high speed crash
 		if (speed2 > MAX_SPEED) {
 			rc2.print();
-			cout << " CRASHED!@! at " << speed2 << "mph - "
+			cout << " CRASHED!@! at " << speed2 << " mph - "
 				<< scenery.getRandomCrash() << ".\n";
 
 			rc2.drive((float)(rand() % DRIVE_MILES));
@@ -147,39 +147,32 @@ void declareWinner(RaceCar& rc1, RaceCar& rc2) {
 
 	// determine winner - most miles driven, no crash
 	if (rc1.getCrash() && rc2.getCrash())
-		cout << "\nNo winner - both cars crashed.";
+		cout << "No winner - both cars crashed.\n";
 	else if (rc1.getCrash()) {
 		rc2.print();
-		cout << " won - the other car crashed.";
+		cout << " won! The other car crashed.\n";
 	}
 	else if (rc2.getCrash()) {
 		rc1.print();
-		cout << " won - the other car crashed.";
+		cout << " won! The other car crashed.\n";
 	}
 	else if (rc1.getAverageSpeed() > rc2.getAverageSpeed()) {
 		rc1.print();
 		cout << " won!\n";
-		rc1.print();
-		cout << " average speed : " << rc1.getAverageSpeed() << "\n";
-		rc2.print();
-		cout << " average speed : " << rc2.getAverageSpeed() << "\n";
 	}
 	else if (rc2.getAverageSpeed() > rc1.getAverageSpeed()) {
 		rc2.print();
 		cout << " won!\n";
-		rc2.print();
-		cout << " average speed : " << rc2.getAverageSpeed() << "\n";
-		rc1.print();
-		cout << " average speed : " << rc1.getAverageSpeed() << "\n";
 	}
 	else {
 		cout << "It's a dead heat!\n";
-		rc1.print();
-		cout << " average speed: " << rc1.getAverageSpeed() << "\n";
-		rc2.print();
-		cout << " average speed: " << rc2.getAverageSpeed() << "\n";
 	}
 
+	cout << "\n";
+	rc1.print();
+	cout << " average speed: " << rc1.getAverageSpeed() << " mph\n";
+	rc2.print();
+	cout << " average speed: " << rc2.getAverageSpeed() << " mph\n";
 	cout << "\n";
 }
 
