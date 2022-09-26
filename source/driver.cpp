@@ -7,6 +7,7 @@
 #include <vector>
 
 #include "RaceCar.h"
+#include "RaceScenery.h"
 
 //------------------------------------------------------------------------------
 // constants
@@ -61,28 +62,21 @@ int main() {
 // run the race loop
 //------------------------------------------------------------------------------
 float race(RaceCar& rc) {
-	vector<string> scenery = {
-		"Zephyr Cove",
-		"Fallen Leaf Lake",
-		"Rubicon Point",
-		"Sugar Pine Point",
-		"Tahoe City",
-		"Carnelian Bay",
-		"Crystal Bay",
-		"Sand Harbor",
-		"Thunderbird Lodge",
-		"Spooner Lake",
-	};
+	RaceScenery scenery;
 
 	float totalMiles = 0;
 	int loopCount = 1;
 
 	// start and end race at last checkpoint
-	cout << "\nStarting at " << scenery.back() << "\n";
+	cout << "\nStarting at " << scenery.getLastScene() << "\n";
 
-	for (auto scene : scenery) {
+	int sceneCount = scenery.getSceneCount();
+
+	for (int i = 1; i < sceneCount; i++) {
 		// initial speed set in RaceCar constructor
 		int speed = rc.getSpeed();
+
+		string scene = scenery.getNextScene();
 
 		// try driving to next checkpoint
 		cout << loopCount++ << ": Driving " << DRIVE_MILES << " miles to "
@@ -90,9 +84,11 @@ float race(RaceCar& rc) {
 
 		// drive random miles to high speed crash
 		if (speed > MAX_SPEED) {
-			cout << "CRASH!@! at " << speed << "mph\n";
-			totalMiles += rc.drive(rand() % DRIVE_MILES);
-			return totalMiles;
+			//#TODO report how crash happened (tree, into the drink, etc.)
+			cout << "CRASH!@! at " << speed << "mph - "
+				<< scenery.getRandomCrash() << ".\n";
+
+			return totalMiles + rc.drive(rand() % DRIVE_MILES);
 		}
 
 		// speed ok, log full distance to checkpoint
