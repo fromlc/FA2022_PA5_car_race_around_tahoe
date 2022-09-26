@@ -67,13 +67,7 @@ public:
 	// return reference to next checkpoint description
 	//--------------------------------------------------------------------------
 	string& getNextScene() {
-		int useIndex = sceneIndex;
-
-		if (sceneIndex < scenery.size() - 1)
-			sceneIndex++;
-		else
-			sceneIndex = 0;
-		return scenery.at(useIndex++);
+		return scenery.at(sceneIndex++);
 	}
 
 	//--------------------------------------------------------------------------

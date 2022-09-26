@@ -72,7 +72,7 @@ float race(RaceCar& rc) {
 
 	int sceneCount = scenery.getSceneCount();
 
-	for (int i = 1; i < sceneCount; i++) {
+	for (int i = 0; i < sceneCount; i++) {
 		// initial speed set in RaceCar constructor
 		int speed = rc.getSpeed();
 
@@ -84,7 +84,6 @@ float race(RaceCar& rc) {
 
 		// drive random miles to high speed crash
 		if (speed > MAX_SPEED) {
-			//#TODO report how crash happened (tree, into the drink, etc.)
 			cout << "CRASH!@! at " << speed << "mph - "
 				<< scenery.getRandomCrash() << ".\n";
 
