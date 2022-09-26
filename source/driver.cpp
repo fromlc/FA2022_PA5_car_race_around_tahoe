@@ -105,12 +105,15 @@ void race(RaceCar& rc1, RaceCar& rc2) {
 		// drive random miles to high speed crash
 		if (speed1 > MAX_SPEED) {
 			rc1.print();
-			cout << "CRASH!@! at " << speed1 << "mph - "
+			cout << " CRASHED!@! at " << speed1 << "mph - "
 				<< scenery.getRandomCrash() << ".\n";
 
 			rc1.drive((float)(rand() % DRIVE_MILES));
 			rc1.setCrash();
 			crash = true;
+		}
+		else {
+			rc1.drive(DRIVE_MILES);
 		}
 
 		// drive random miles to high speed crash
@@ -123,13 +126,12 @@ void race(RaceCar& rc1, RaceCar& rc2) {
 			rc2.setCrash();
 			crash = true;
 		}
+		else {
+			rc2.drive(DRIVE_MILES);
+		}
 		
 		if (crash)
 			return;
-
-		// speed ok, log full distance to checkpoint
-		rc1.drive(DRIVE_MILES);
-		rc2.drive(DRIVE_MILES);
 
 		// set speed for next stage
 		rc1.setRandomSpeed(MIN_SPEED, MAX_SPEED + CRASH_FACTOR);
