@@ -61,10 +61,6 @@ int main() {
 // run the race loop
 //------------------------------------------------------------------------------
 float race(RaceCar& rc) {
-	float driven;
-	float totalMiles = 0;
-	int loopCount = 1;
-
 	vector<string> scenery = {
 		"Zephyr Cove",
 		"Fallen Leaf Lake",
@@ -78,26 +74,32 @@ float race(RaceCar& rc) {
 		"Spooner Lake",
 	};
 
+	float totalMiles = 0;
+	int loopCount = 1;
+
+	// start and end race at last checkpoint
 	cout << "\nStarting at " << scenery.back() << "\n";
 
 	for (auto scene : scenery) {
-		driven = rc.drive(DRIVE_MILES);
+		// initial speed set in RaceCar constructor
 		int speed = rc.getSpeed();
 
-		cout << loopCount++ << ": Driving " << driven << " miles to "
+		// try driving to next checkpoint
+		cout << loopCount++ << ": Driving " << DRIVE_MILES << " miles to "
 			<< scene << " at " << rc.getSpeed() << "mph\n";
 
+		// drive random miles to high speed crash
 		if (speed > MAX_SPEED) {
 			cout << "CRASH!@! at " << speed << "mph\n";
-			totalMiles += (rand() % DRIVE_MILES);
-			break;
+			totalMiles += rc.drive(rand() % DRIVE_MILES);
+			return totalMiles;
 		}
-		else {
-			totalMiles += driven;
 
-			// set speed for next stage
-			rc.setRandomSpeed(MIN_SPEED, MAX_SPEED + CRASH_FACTOR);
-		}
+		// speed ok, log full distance to checkpoint
+		totalMiles += rc.drive(DRIVE_MILES);
+
+		// set speed for next stage
+		rc.setRandomSpeed(MIN_SPEED, MAX_SPEED + CRASH_FACTOR);
 	}
 
 	return totalMiles;
