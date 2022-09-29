@@ -12,8 +12,7 @@
 //------------------------------------------------------------------------------
 // constants
 //------------------------------------------------------------------------------
-constexpr int MILES_TO_CHECKPOINT = 10;
-
+constexpr int MILES_TO_CHECKPOINT = 10; //#TODO
 constexpr int MIN_SPEED = 60;
 constexpr int MAX_SPEED = 80;
 // higher crash factor makes crashes more likely
@@ -24,6 +23,7 @@ constexpr int CRASH_FACTOR = 5;
 //------------------------------------------------------------------------------
 RaceCar g_c1;
 RaceCar g_c2("1965", "Ford", "Mustang");
+RaceScenery g_scenery;
 
 //------------------------------------------------------------------------------
 // using symbols
@@ -39,6 +39,7 @@ using std::vector;
 //------------------------------------------------------------------------------
 void preRaceDisplay();
 void race();
+bool checkForCrash(RaceCar& rc);
 void declareWinner();
 
 //------------------------------------------------------------------------------
@@ -63,6 +64,7 @@ int main() {
 void preRaceDisplay() {
 	cout << "RACE AROUND LAKE TAHOE\n\n";
 
+	// car descriptions
 	g_c1.print();
 	cout << "\n";
 	g_c2.print();
@@ -78,69 +80,54 @@ void preRaceDisplay() {
 // run the race loop
 //------------------------------------------------------------------------------
 void race() {
-	RaceScenery scenery;
-
 	// start and end race at last checkpoint
-	cout << "\nStarting at " << scenery.getLastScene() << "\n\n";
+	cout << "\nStarting at " << g_scenery.getLastScene() << "\n\n";
 
-	int sceneCount = scenery.getSceneCount();
+	int sceneCount = g_scenery.getSceneCount();
 
 	for (int i = 0; i < sceneCount; i++) {
-		// initial speed set in RaceCar constructor
-		int speed1 = g_c1.getSpeed();
-		int speed2 = g_c2.getSpeed();
-
-		string scene = scenery.getNextScene();
-
-		// try driving to next checkpoint
+		// set out for next checkpoint
 		cout << "Stage " << i + 1 << ": "
-			<< MILES_TO_CHECKPOINT << " miles to " << scene << "\n";
+			<< MILES_TO_CHECKPOINT << " miles to " 
+			<< g_scenery.getNextScene() << "\n";
 
-		g_c1.print();
-		cout << ": " << g_c1.getSpeed() << " mph\n";
-		g_c2.print();
-		cout << ": " << g_c2.getSpeed() << " mph\n";
+		// force both cars to drive
+		bool crash1 = checkForCrash(g_c1);
+		bool crash2 = checkForCrash(g_c2);
+
 		cout << "\n";
 
-		// crash flag
-		bool crash = false;
-
-
-		// speed too high -> drive random miles
-		if (speed1 > MAX_SPEED) {
-			g_c1.print();
-			cout << " CRASHED!@! at " << speed1 << " mph - "
-				<< scenery.getRandomCrash() << ".\n";
-
-			g_c1.drive((float)(rand() % MILES_TO_CHECKPOINT));
-			g_c1.setCrash();
-			crash = true;
-		}
-		else {
-			g_c1.drive(MILES_TO_CHECKPOINT);
-		}
-
-		// drive random miles to high speed crash
-		if (speed2 > MAX_SPEED) {
-			g_c2.print();
-			cout << " CRASHED!@! at " << speed2 << " mph - "
-				<< scenery.getRandomCrash() << ".\n";
-
-			g_c2.drive((float)(rand() % MILES_TO_CHECKPOINT));
-			g_c2.setCrash();
-			crash = true;
-		}
-		else {
-			g_c2.drive(MILES_TO_CHECKPOINT);
-		}
-		
-		if (crash)
+		if (crash1 || crash2)
 			return;
 
 		// set speed for next stage
 		g_c1.setRandomSpeed(MIN_SPEED, MAX_SPEED + CRASH_FACTOR);
 		g_c2.setRandomSpeed(MIN_SPEED, MAX_SPEED + CRASH_FACTOR);
 	}
+}
+
+//------------------------------------------------------------------------------
+// returns true if rc exceeds max speed, false otherwise
+//------------------------------------------------------------------------------
+bool checkForCrash(RaceCar& rc) {
+
+	float speed = rc.getSpeed();
+	rc.print();
+	cout << ": " << speed << " mph\n";
+	 
+	// speed too high -> drive random miles
+	if (speed > MAX_SPEED) {
+		rc.print();
+		cout << " CRASHED!@! at " << speed << " mph - "
+			<< g_scenery.getRandomCrash() << ".\n";
+
+		rc.drive((float)(rand() % MILES_TO_CHECKPOINT));
+		rc.setCrash();
+		return true;
+	}
+
+	rc.drive(MILES_TO_CHECKPOINT);
+	return false;
 }
 
 //------------------------------------------------------------------------------
