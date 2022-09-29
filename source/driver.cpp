@@ -12,12 +12,11 @@
 //------------------------------------------------------------------------------
 // constants
 //------------------------------------------------------------------------------
-constexpr int DRIVE_MILES = 10;
-constexpr float ADD_GALLONS = 1;
+constexpr int MILES_TO_CHECKPOINT = 10;
 
 constexpr int MIN_SPEED = 60;
 constexpr int MAX_SPEED = 80;
-constexpr int CRASH_FACTOR = 5;
+constexpr int CRASH_FACTOR = 8;
 
 //------------------------------------------------------------------------------
 // using symbols
@@ -40,7 +39,7 @@ void declareWinner(RaceCar& rc1, RaceCar& rc2);
 int main() {
 	cout << "RACE AROUND LAKE TAHOE\n\n";
 
-	RaceCar c1;
+	RaceCar c1("2002", "Lambo", "Murcielago");
 	c1.print();
 	cout << "\n";
 	RaceCar c2("1965", "Ford", "Mustang");
@@ -50,22 +49,13 @@ int main() {
 	// gas up
 	c1.fillUp();
 	c2.fillUp();
+	cout << "\nBoth gassed up and ready to race!\n";
 
 	// set numeric display format
 	cout << setprecision(1) << fixed << showpoint;
-	
-	cout << "\nBoth gassed up and ready to race!\n";
 
 	// let's drive!
 	race(c1, c2);
-
-	// display distances driven
-	cout << "\n";
-	c1.print();
-	cout << " drove " << c1.getMilesDriven() << " miles.\n";
-	c2.print();
-	cout << " drove " << c2.getMilesDriven() << " miles.\n";
-
 	declareWinner(c1, c2);
 
 	return 0;
@@ -91,7 +81,7 @@ void race(RaceCar& rc1, RaceCar& rc2) {
 
 		// try driving to next checkpoint
 		cout << "Stage " << i + 1 << ": "
-			<< DRIVE_MILES << " miles to " << scene << "\n";
+			<< MILES_TO_CHECKPOINT << " miles to " << scene << "\n";
 
 		rc1.print();
 		cout << ": " << rc1.getSpeed() << " mph\n";
@@ -102,18 +92,19 @@ void race(RaceCar& rc1, RaceCar& rc2) {
 		// crash flag
 		bool crash = false;
 
-		// drive random miles to high speed crash
+
+		// speed too high -> drive random miles
 		if (speed1 > MAX_SPEED) {
 			rc1.print();
 			cout << " CRASHED!@! at " << speed1 << " mph - "
 				<< scenery.getRandomCrash() << ".\n";
 
-			rc1.drive((float)(rand() % DRIVE_MILES));
+			rc1.drive((float)(rand() % MILES_TO_CHECKPOINT));
 			rc1.setCrash();
 			crash = true;
 		}
 		else {
-			rc1.drive(DRIVE_MILES);
+			rc1.drive(MILES_TO_CHECKPOINT);
 		}
 
 		// drive random miles to high speed crash
@@ -122,12 +113,12 @@ void race(RaceCar& rc1, RaceCar& rc2) {
 			cout << " CRASHED!@! at " << speed2 << " mph - "
 				<< scenery.getRandomCrash() << ".\n";
 
-			rc2.drive((float)(rand() % DRIVE_MILES));
+			rc2.drive((float)(rand() % MILES_TO_CHECKPOINT));
 			rc2.setCrash();
 			crash = true;
 		}
 		else {
-			rc2.drive(DRIVE_MILES);
+			rc2.drive(MILES_TO_CHECKPOINT);
 		}
 		
 		if (crash)
@@ -145,23 +136,29 @@ void race(RaceCar& rc1, RaceCar& rc2) {
 void declareWinner(RaceCar& rc1, RaceCar& rc2) {
 	cout << "\n";
 
+	bool rc1Crash = rc1.getCrash();
+	bool rc2Crash = rc2.getCrash();
+
+	float rc1Avg = rc1.getAverageSpeed();
+	float rc2Avg = rc2.getAverageSpeed();
+
 	// determine winner - fastest average speed with no crash
-	if (rc1.getCrash() && rc2.getCrash()) {
+	if (rc1Crash && rc2Crash) {
 		cout << "No winner - both cars crashed.\n";
 	}
-	else if (rc1.getCrash()) {
+	else if (rc1Crash) {
 		rc2.print();
 		cout << " won! The other car crashed.\n";
 	}
-	else if (rc2.getCrash()) {
+	else if (rc2Crash) {
 		rc1.print();
 		cout << " won! The other car crashed.\n";
 	}
-	else if (rc1.getAverageSpeed() > rc2.getAverageSpeed()) {
+	else if (rc1Avg > rc2Avg) {
 		rc1.print();
 		cout << " won!\n";
 	}
-	else if (rc2.getAverageSpeed() > rc1.getAverageSpeed()) {
+	else if (rc2Avg > rc1Avg) {
 		rc2.print();
 		cout << " won!\n";
 	}
@@ -169,6 +166,14 @@ void declareWinner(RaceCar& rc1, RaceCar& rc2) {
 		cout << "It's a dead heat!\n";
 	}
 
+	// display distances driven
+	cout << "\n";
+	rc1.print();
+	cout << " drove " << rc1.getMilesDriven() << " miles.\n";
+	rc2.print();
+	cout << " drove " << rc2.getMilesDriven() << " miles.\n";
+
+	// display average speeds
 	cout << "\n";
 	rc1.print();
 	cout << " average speed: " << rc1.getAverageSpeed() << " mph\n";
