@@ -16,7 +16,14 @@ constexpr int MILES_TO_CHECKPOINT = 10;
 
 constexpr int MIN_SPEED = 60;
 constexpr int MAX_SPEED = 80;
-constexpr int CRASH_FACTOR = 8;
+// higher crash factor makes crashes more likely
+constexpr int CRASH_FACTOR = 5;
+
+//------------------------------------------------------------------------------
+// globals
+//------------------------------------------------------------------------------
+RaceCar g_c1;
+RaceCar g_c2("1965", "Ford", "Mustang");
 
 //------------------------------------------------------------------------------
 // using symbols
@@ -30,41 +37,47 @@ using std::vector;
 //------------------------------------------------------------------------------
 // local function prototypes
 //------------------------------------------------------------------------------
-void race(RaceCar& rc1, RaceCar& rc2);
-void declareWinner(RaceCar& rc1, RaceCar& rc2);
+void preRaceDisplay();
+void race();
+void declareWinner();
 
 //------------------------------------------------------------------------------
 // entry point
 //------------------------------------------------------------------------------
 int main() {
-	cout << "RACE AROUND LAKE TAHOE\n\n";
-
-	RaceCar c1("2002", "Lambo", "Murcielago");
-	c1.print();
-	cout << "\n";
-	RaceCar c2("1965", "Ford", "Mustang");
-	c2.print();
-	cout << "\n";
-
-	// gas up
-	c1.fillUp();
-	c2.fillUp();
-	cout << "\nBoth gassed up and ready to race!\n";
-
 	// set numeric display format
 	cout << setprecision(1) << fixed << showpoint;
 
+	preRaceDisplay();
+
 	// let's drive!
-	race(c1, c2);
-	declareWinner(c1, c2);
+	race();
+	declareWinner();
 
 	return 0;
 }
 
 //------------------------------------------------------------------------------
+// pre-race display
+//------------------------------------------------------------------------------
+void preRaceDisplay() {
+	cout << "RACE AROUND LAKE TAHOE\n\n";
+
+	g_c1.print();
+	cout << "\n";
+	g_c2.print();
+	cout << "\n";
+
+	// gas up
+	g_c1.fillUp();
+	g_c2.fillUp();
+	cout << "\nBoth gassed up and ready to race!\n";
+}
+
+//------------------------------------------------------------------------------
 // run the race loop
 //------------------------------------------------------------------------------
-void race(RaceCar& rc1, RaceCar& rc2) {
+void race() {
 	RaceScenery scenery;
 
 	// start and end race at last checkpoint
@@ -74,8 +87,8 @@ void race(RaceCar& rc1, RaceCar& rc2) {
 
 	for (int i = 0; i < sceneCount; i++) {
 		// initial speed set in RaceCar constructor
-		int speed1 = rc1.getSpeed();
-		int speed2 = rc2.getSpeed();
+		int speed1 = g_c1.getSpeed();
+		int speed2 = g_c2.getSpeed();
 
 		string scene = scenery.getNextScene();
 
@@ -83,10 +96,10 @@ void race(RaceCar& rc1, RaceCar& rc2) {
 		cout << "Stage " << i + 1 << ": "
 			<< MILES_TO_CHECKPOINT << " miles to " << scene << "\n";
 
-		rc1.print();
-		cout << ": " << rc1.getSpeed() << " mph\n";
-		rc2.print();
-		cout << ": " << rc2.getSpeed() << " mph\n";
+		g_c1.print();
+		cout << ": " << g_c1.getSpeed() << " mph\n";
+		g_c2.print();
+		cout << ": " << g_c2.getSpeed() << " mph\n";
 		cout << "\n";
 
 		// crash flag
@@ -95,71 +108,71 @@ void race(RaceCar& rc1, RaceCar& rc2) {
 
 		// speed too high -> drive random miles
 		if (speed1 > MAX_SPEED) {
-			rc1.print();
+			g_c1.print();
 			cout << " CRASHED!@! at " << speed1 << " mph - "
 				<< scenery.getRandomCrash() << ".\n";
 
-			rc1.drive((float)(rand() % MILES_TO_CHECKPOINT));
-			rc1.setCrash();
+			g_c1.drive((float)(rand() % MILES_TO_CHECKPOINT));
+			g_c1.setCrash();
 			crash = true;
 		}
 		else {
-			rc1.drive(MILES_TO_CHECKPOINT);
+			g_c1.drive(MILES_TO_CHECKPOINT);
 		}
 
 		// drive random miles to high speed crash
 		if (speed2 > MAX_SPEED) {
-			rc2.print();
+			g_c2.print();
 			cout << " CRASHED!@! at " << speed2 << " mph - "
 				<< scenery.getRandomCrash() << ".\n";
 
-			rc2.drive((float)(rand() % MILES_TO_CHECKPOINT));
-			rc2.setCrash();
+			g_c2.drive((float)(rand() % MILES_TO_CHECKPOINT));
+			g_c2.setCrash();
 			crash = true;
 		}
 		else {
-			rc2.drive(MILES_TO_CHECKPOINT);
+			g_c2.drive(MILES_TO_CHECKPOINT);
 		}
 		
 		if (crash)
 			return;
 
 		// set speed for next stage
-		rc1.setRandomSpeed(MIN_SPEED, MAX_SPEED + CRASH_FACTOR);
-		rc2.setRandomSpeed(MIN_SPEED, MAX_SPEED + CRASH_FACTOR);
+		g_c1.setRandomSpeed(MIN_SPEED, MAX_SPEED + CRASH_FACTOR);
+		g_c2.setRandomSpeed(MIN_SPEED, MAX_SPEED + CRASH_FACTOR);
 	}
 }
 
 //------------------------------------------------------------------------------
 // display race outcome
 //------------------------------------------------------------------------------
-void declareWinner(RaceCar& rc1, RaceCar& rc2) {
+void declareWinner() {
 	cout << "\n";
 
-	bool rc1Crash = rc1.getCrash();
-	bool rc2Crash = rc2.getCrash();
+	bool rc1Crash = g_c1.getCrash();
+	bool rc2Crash = g_c2.getCrash();
 
-	float rc1Avg = rc1.getAverageSpeed();
-	float rc2Avg = rc2.getAverageSpeed();
+	float rc1Avg = g_c1.getAverageSpeed();
+	float rc2Avg = g_c2.getAverageSpeed();
 
 	// determine winner - fastest average speed with no crash
 	if (rc1Crash && rc2Crash) {
 		cout << "No winner - both cars crashed.\n";
 	}
 	else if (rc1Crash) {
-		rc2.print();
+		g_c2.print();
 		cout << " won! The other car crashed.\n";
 	}
 	else if (rc2Crash) {
-		rc1.print();
+		g_c1.print();
 		cout << " won! The other car crashed.\n";
 	}
 	else if (rc1Avg > rc2Avg) {
-		rc1.print();
+		g_c1.print();
 		cout << " won!\n";
 	}
 	else if (rc2Avg > rc1Avg) {
-		rc2.print();
+		g_c2.print();
 		cout << " won!\n";
 	}
 	else {
@@ -168,19 +181,16 @@ void declareWinner(RaceCar& rc1, RaceCar& rc2) {
 
 	// display distances driven
 	cout << "\n";
-	rc1.print();
-	cout << " drove " << rc1.getMilesDriven() << " miles.\n";
-	rc2.print();
-	cout << " drove " << rc2.getMilesDriven() << " miles.\n";
+	g_c1.print();
+	cout << " drove " << g_c1.getMilesDriven() << " miles.\n";
+	g_c2.print();
+	cout << " drove " << g_c2.getMilesDriven() << " miles.\n";
 
 	// display average speeds
 	cout << "\n";
-	rc1.print();
-	cout << " average speed: " << rc1.getAverageSpeed() << " mph\n";
-	rc2.print();
-	cout << " average speed: " << rc2.getAverageSpeed() << " mph\n";
+	g_c1.print();
+	cout << " average speed: " << g_c1.getAverageSpeed() << " mph\n";
+	g_c2.print();
+	cout << " average speed: " << g_c2.getAverageSpeed() << " mph\n";
 	cout << "\n";
 }
-
-
-
