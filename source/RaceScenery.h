@@ -9,6 +9,9 @@
 #include <ctime>
 #include <vector>
 
+//------------------------------------------------------------------------------
+// using symbols
+//------------------------------------------------------------------------------
 using std::string;
 using std::vector;
 
@@ -40,11 +43,13 @@ private:
 	// crash scenes
 	//--------------------------------------------------------------------------
 	vector<string> crashes = {
-		"bent around a big tree",
+		"bent around a big sugar pine",
 		"pitched into the drink",
 		"took that corner too fast",
 		"hit a robo-meter maid",
 		"hit a fence and flipped over",
+		"hit a yeti",
+		"hit some gravel and spun out",
 	};
 
 public:

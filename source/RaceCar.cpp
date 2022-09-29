@@ -9,8 +9,12 @@
 #include "FuelGauge.h"
 #include "RaceCar.h"
 
+//------------------------------------------------------------------------------
+// using symbols
+//------------------------------------------------------------------------------
 using std::cout;
 using std::rand;
+using std::srand;
 using std::string;
 
 //------------------------------------------------------------------------------
@@ -91,3 +95,4 @@ float RaceCar::getAverageSpeed() {
 	}
 	return (float) accumulateSpeed / (float) speedLog.size();
 }
+

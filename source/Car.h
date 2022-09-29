@@ -9,6 +9,9 @@
 #include "Odometer.h"
 #include "FuelGauge.h"
 
+//------------------------------------------------------------------------------
+// using symbols
+//------------------------------------------------------------------------------
 using std::string;
 
 //----------------------------------------------------------------------
@@ -19,6 +22,7 @@ protected:
 	string make;
 	string model;
 	string year;
+	string description;
 	Odometer odo;
 	FuelGauge fg;
 
@@ -48,10 +52,8 @@ public:
 	// returns number of miles remaining given fuel level
 	float canDriveMiles() const;
 
-	// pretty print year, make, model, odometer reading, fuel level, MPG
-	void print() const;
+	// pretty print car description
+	virtual string& getDescription();
 };
 #endif	// CAR_H
-
-
 
