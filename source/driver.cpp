@@ -74,21 +74,20 @@ void preRace() {
 	cout << RESET_COLORS;
 
 	// car descriptions
-	cout << g_c1.getDescription() << " will race ";
-	cout << g_c2.getDescription() << ".\n";
+	cout << "My " << g_c1.getDescription() << " will take on your ";
+	cout << g_c2.getDescription() << "!\n";
 
 	// gas up both cars
 	fillUp();
-	cout << "\nBoth gassed up and ready to race, ";
+	cout << "\nBoth cars are gassed up and ready to race,\n";
+	// start and end race at last checkpoint
+	cout << "starting and ending at " << g_scenery.getLastScene() << ".\n\n";
 }
 
 //------------------------------------------------------------------------------
 // run the race loop
 //------------------------------------------------------------------------------
 void race() {
-	// start and end race at last checkpoint
-	cout << "starting and ending at " << g_scenery.getLastScene() << ".\n\n";
-
 	int sceneCount = g_scenery.getSceneCount();
 
 	for (int i = 0; i < sceneCount; i++) {
