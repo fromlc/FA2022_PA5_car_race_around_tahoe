@@ -27,22 +27,19 @@ private:
 		"Zephyr Cove",
 		"Fallen Leaf Lake",
 		"Rubicon Point",
-		//"Sugar Pine Point",
 		"Tahoe City",
 		"Carnelian Bay",
-		//"Crystal Bay",
 		"Sand Harbor",
-		//"Thunderbird Lodge",
 		"Spooner Lake",
 	};
 
 	vector<float> distances = {
-		12.5, // to Zephyr Cove
-		13.0, // to Fallen Leaf Lake
-		15.5, // to Rubicon Point
-		16.0, // to Tahoe City
-		13.5, // to Carnelian Bay
-		14.0, // to Sand Harbor
+		12.5, // from Spooner Lake to Zephyr Cove
+		13.0, // from Zephyr Cove to Fallen Leaf Lake
+		15.5, // from Fallen Leaf Lake to Rubicon Point
+		16.0, // from Rubicon Point to Tahoe City
+		13.5, // from Tahoe City to Carnelian Bay
+		14.0, // from Carnelian Bay to Sand Harbor
 		17.5, // to Spooner Lake
 	};
 
@@ -56,10 +53,10 @@ private:
 	vector<string> crashes = {
 		"bent around a big sugar pine",
 		"pitched into the drink",
-		"took that corner too fast",
+		"took that corner way too fast",
 		"hit a robo-meter maid",
 		"hit a fence and flipped over",
-		"hit a yeti",
+		"accordioned into a yeti",
 		"skidded on gravel and spun out",
 	};
 

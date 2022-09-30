@@ -70,19 +70,19 @@ int main() {
 //------------------------------------------------------------------------------
 void preRace() {
 	cout << CYAN;
-	cout << "RACE AROUND LAKE TAHOE\n\n";
+	cout << "\nRACE AROUND LAKE TAHOE\n\n";
 	cout << RESET_COLORS;
 
 	// car descriptions
-	cout << "A " << g_c1.getDescription() << " will take on a souped ";
-	cout << g_c2.getDescription() << "!\n";
+	cout << "A stock " << g_c1.getDescription() << " takes on a souped ";
+	cout << g_c2.getDescription() << ".\n";
 
+	// races starts and ends at last checkpoint
+	cout << "\nThe race starts and ends at "
+		<< g_scenery.getLastScene() << ".\n";
 	// gas up both cars
 	fillUp();
-	cout << "\nBoth cars are gassed up and ready to go.\n";
-	// start and end race at last checkpoint
-	cout << "The race starts and ends at "
-		<< g_scenery.getLastScene() << ".\n\n";
+	cout << "Both cars are gassed up and ready to go!\n\n";
 }
 
 //------------------------------------------------------------------------------
@@ -149,18 +149,20 @@ void declareWinner() {
 	string rc1Desc = g_c1.getDescription();
 	string rc2Desc = g_c2.getDescription();
 
-	// determine winner - fastest average speed with no crash
+	// winner has fastest average speed with no crash
 	if (rc1Crash && rc2Crash) {
 		cout << YELLOW << "No winner - both cars crashed.\n"
 			<< RESET_COLORS;
 	}
 	else if (rc1Crash) {
-		cout << YELLOW << "The " << rc2Desc << " won!" << RESET_COLORS
-			<< " The " << rc1Desc << " is waiting for a tow truck.\n";
+		cout << YELLOW << "The " << rc2Desc << " won!" << RESET_COLORS;
+		cout << "\nThe poor mangled " << rc1Desc 
+			<< " is waiting for a tow truck.\n";
 	}
 	else if (rc2Crash) {
-		cout << YELLOW << "The " << rc1Desc << " won!" << RESET_COLORS
-			<< " The " << rc2Desc << " crashed.\n";
+		cout << YELLOW << "The " << rc1Desc << " won!" << RESET_COLORS;
+		cout << "\nWhat's left of the " << rc2Desc 
+			<< " is sadly hanging from a stinger.\n\n";
 	}
 	else if (rc1Avg > rc2Avg) {
 		cout << YELLOW << rc1Desc << " won!\n" << RESET_COLORS;
