@@ -74,14 +74,15 @@ void preRace() {
 	cout << RESET_COLORS;
 
 	// car descriptions
-	cout << "My " << g_c1.getDescription() << " will take on your ";
+	cout << "A " << g_c1.getDescription() << " will take on a souped ";
 	cout << g_c2.getDescription() << "!\n";
 
 	// gas up both cars
 	fillUp();
-	cout << "\nBoth cars are gassed up and ready to race,\n";
+	cout << "\nBoth cars are gassed up and ready to go.\n";
 	// start and end race at last checkpoint
-	cout << "starting and ending at " << g_scenery.getLastScene() << ".\n\n";
+	cout << "The race starts and ends at "
+		<< g_scenery.getLastScene() << ".\n\n";
 }
 
 //------------------------------------------------------------------------------
@@ -118,11 +119,11 @@ void race() {
 void driveStage(RaceCar& rc, float miles) {
 
 	int speed = rc.getSpeed();
-	cout << rc.getDescription() << ": " << speed << " mph";
+	cout << rc.getDescription() << " averaged " << speed << " mph";
 	 
 	// speed too high -> drive part way to checkpoint
 	if (speed > MAX_SPEED) {
-		cout << RED << " CRASHED!@!" << RESET_COLORS <<
+		cout << " but it " << RED << "CRASHED!@!" << RESET_COLORS <<
 			" It " << g_scenery.getRandomCrash() << ".\n";
 
 		rc.drive((float)(rand() % (int) miles));
@@ -154,12 +155,12 @@ void declareWinner() {
 			<< RESET_COLORS;
 	}
 	else if (rc1Crash) {
-		cout << YELLOW << rc2Desc
-			<< " won!" << RESET_COLORS << " The other car crashed.\n";
+		cout << YELLOW << "The " << rc2Desc << " won!" << RESET_COLORS
+			<< " The " << rc1Desc << " is waiting for a tow truck.\n";
 	}
 	else if (rc2Crash) {
-		cout << YELLOW << rc1Desc
-			<< " won!" << RESET_COLORS << " The other car crashed.\n";
+		cout << YELLOW << "The " << rc1Desc << " won!" << RESET_COLORS
+			<< " The " << rc2Desc << " crashed.\n";
 	}
 	else if (rc1Avg > rc2Avg) {
 		cout << YELLOW << rc1Desc << " won!\n" << RESET_COLORS;
