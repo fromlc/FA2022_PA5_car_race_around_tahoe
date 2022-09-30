@@ -114,13 +114,11 @@ void race() {
 bool driveStage(RaceCar& rc, float miles) {
 
 	int speed = rc.getSpeed();
-	
-	cout << rc.getDescription() << ": " << speed << " mph\n";
+	cout << rc.getDescription() << ": " << speed << " mph";
 	 
 	// speed too high -> drive part way to checkpoint
 	if (speed > MAX_SPEED) {
-		cout << rc.getDescription() << " CRASHED!@! at " 
-			<< speed << " mph - "
+		cout << " CRASHED!@! - " 
 			<< g_scenery.getRandomCrash() << ".\n";
 
 		rc.drive((float)(rand() % (int) miles));
@@ -128,7 +126,9 @@ bool driveStage(RaceCar& rc, float miles) {
 		return true;
 	}
 
+	cout << "\n";
 	rc.drive(miles);
+	
 	return false;
 }
 
