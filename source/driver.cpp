@@ -5,6 +5,8 @@
 #include <iostream>
 #include <string>
 
+#include "ansi_colors.h"
+
 #include "RaceCar.h"
 #include "RaceScenery.h"
 
@@ -67,15 +69,17 @@ int main() {
 // pre-race display
 //------------------------------------------------------------------------------
 void preRace() {
+	cout << CYAN;
 	cout << "RACE AROUND LAKE TAHOE\n\n";
+	cout << RESET_COLORS;
 
 	// car descriptions
-	cout << g_c1.getDescription() << "\n";
-	cout << g_c2.getDescription() << "\n";
+	cout << g_c1.getDescription() << " will race ";
+	cout << g_c2.getDescription() << ".\n";
 
 	// gas up both cars
 	fillUp();
-	cout << "\nBoth gassed up and ready to race!\n";
+	cout << "\nBoth gassed up and ready to race, ";
 }
 
 //------------------------------------------------------------------------------
@@ -83,7 +87,7 @@ void preRace() {
 //------------------------------------------------------------------------------
 void race() {
 	// start and end race at last checkpoint
-	cout << "\nStarting at " << g_scenery.getLastScene() << "\n\n";
+	cout << "starting and ending at " << g_scenery.getLastScene() << ".\n\n";
 
 	int sceneCount = g_scenery.getSceneCount();
 
@@ -93,8 +97,9 @@ void race() {
 		float miles = g_scenery.getNextDistance();
 
 		// set out for next checkpoint
-		cout << "Stage " << i + 1 << ": " << miles
-			<< " miles to " << g_scenery.getNextScene() << "\n";
+		cout << CYAN << "Stage " << i + 1 << ": " 
+			<< miles << " miles to " << g_scenery.getNextScene()
+			<< RESET_COLORS << "\n";
 
 		// drive both cars to next checkpoint
 		driveStage(miles);
@@ -118,8 +123,8 @@ void driveStage(RaceCar& rc, float miles) {
 	 
 	// speed too high -> drive part way to checkpoint
 	if (speed > MAX_SPEED) {
-		cout << " CRASHED!@! It " 
-			<< g_scenery.getRandomCrash() << ".\n";
+		cout << RED << " CRASHED!@!" << RESET_COLORS <<
+			" It " << g_scenery.getRandomCrash() << ".\n";
 
 		rc.drive((float)(rand() % (int) miles));
 		rc.setCrash();
@@ -146,20 +151,22 @@ void declareWinner() {
 
 	// determine winner - fastest average speed with no crash
 	if (rc1Crash && rc2Crash) {
-		cout << "No winner - both cars crashed.\n";
+		cout << YELLOW << "No winner - both cars crashed.\n"
+			<< RESET_COLORS;
 	}
 	else if (rc1Crash) {
-		cout << rc2Desc
-			<< " won! The other car crashed.\n";
+		cout << YELLOW << rc2Desc
+			<< " won!" << RESET_COLORS << " The other car crashed.\n";
 	}
 	else if (rc2Crash) {
-		cout << rc1Desc << " won! The other car crashed.\n";
+		cout << YELLOW << rc1Desc
+			<< " won!" << RESET_COLORS << " The other car crashed.\n";
 	}
 	else if (rc1Avg > rc2Avg) {
-		cout << rc1Desc << " won!\n";
+		cout << YELLOW << rc1Desc << " won!\n" << RESET_COLORS;
 	}
 	else if (rc2Avg > rc1Avg) {
-		cout << rc2Desc << " won!\n";
+		cout << YELLOW << rc2Desc << " won!\n" << RESET_COLORS;
 	}
 	else {
 		cout << "It's a dead heat!\n";
