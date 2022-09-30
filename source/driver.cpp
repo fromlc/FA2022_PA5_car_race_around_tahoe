@@ -171,7 +171,7 @@ void declareWinner() {
 		cout << YELLOW << rc2Desc << " won!\n" << RESET_COLORS;
 	}
 	else {
-		cout << "It's a dead heat!\n";
+		cout << GREEN << "It's a dead heat!\n" << RESET_COLORS;
 	}
 
 	// display distances driven
