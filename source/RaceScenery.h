@@ -60,7 +60,7 @@ private:
 		"hit a robo-meter maid",
 		"hit a fence and flipped over",
 		"hit a yeti",
-		"hit some gravel and spun out",
+		"skidded on gravel and spun out",
 	};
 
 public:
@@ -70,7 +70,7 @@ public:
 	RaceScenery() {
 		sceneIndex = 0;
 		distanceIndex = 0;
-		srand((unsigned int)time(0));
+		srand((unsigned int) time(0));
 	}
 
 	//--------------------------------------------------------------------------

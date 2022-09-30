@@ -2,17 +2,14 @@
 // RaceCar : derived class definition
 //------------------------------------------------------------------------------
 #include <cstdlib>
-#include <iostream>
+#include <ctime>
 #include <string>
 
-#include "Odometer.h"
-#include "FuelGauge.h"
 #include "RaceCar.h"
 
 //------------------------------------------------------------------------------
 // using symbols
 //------------------------------------------------------------------------------
-using std::cout;
 using std::rand;
 using std::srand;
 using std::string;

@@ -5,8 +5,6 @@
 #include <string>
 #include <sstream>
 
-#include "Odometer.h"
-#include "FuelGauge.h"
 #include "Car.h"
 
 //------------------------------------------------------------------------------
