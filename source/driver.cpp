@@ -39,7 +39,7 @@ using std::vector;
 //------------------------------------------------------------------------------
 void preRace();
 void race();
-bool driveStage(RaceCar& rc);
+bool driveStage(RaceCar& rc, float miles);
 void declareWinner();
 
 //------------------------------------------------------------------------------
@@ -86,14 +86,16 @@ void race() {
 
 	for (int i = 0; i < sceneCount; i++) {
 
+		// miles to next checkpoint
+		float miles = g_scenery.getNextDistance();
+
 		// set out for next checkpoint
-		cout << "Stage " << i + 1 << ": "
-			<< MILES_TO_CHECKPOINT << " miles to " 
-			<< g_scenery.getNextScene() << "\n";
+		cout << "Stage " << i + 1 << ": " << miles
+			<< " miles to " << g_scenery.getNextScene() << "\n";
 
 		// force both cars to drive
-		bool crash1 = driveStage(g_c1);
-		bool crash2 = driveStage(g_c2);
+		bool crash1 = driveStage(g_c1, miles);
+		bool crash2 = driveStage(g_c2, miles);
 
 		cout << "\n";
 
@@ -109,7 +111,7 @@ void race() {
 //------------------------------------------------------------------------------
 // returns true if car exceeds max speed and crashes, false otherwise
 //------------------------------------------------------------------------------
-bool driveStage(RaceCar& rc) {
+bool driveStage(RaceCar& rc, float miles) {
 
 	int speed = rc.getSpeed();
 	
@@ -121,12 +123,12 @@ bool driveStage(RaceCar& rc) {
 			<< speed << " mph - "
 			<< g_scenery.getRandomCrash() << ".\n";
 
-		rc.drive((float)(rand() % MILES_TO_CHECKPOINT));
+		rc.drive((float)(rand() % (int) miles));
 		rc.setCrash();
 		return true;
 	}
 
-	rc.drive(MILES_TO_CHECKPOINT);
+	rc.drive(miles);
 	return false;
 }
 

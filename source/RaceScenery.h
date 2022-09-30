@@ -27,17 +27,28 @@ private:
 		"Zephyr Cove",
 		"Fallen Leaf Lake",
 		"Rubicon Point",
-		"Sugar Pine Point",
+		//"Sugar Pine Point",
 		"Tahoe City",
 		"Carnelian Bay",
-		"Crystal Bay",
+		//"Crystal Bay",
 		"Sand Harbor",
-		"Thunderbird Lodge",
+		//"Thunderbird Lodge",
 		"Spooner Lake",
 	};
 
-	// current checkpoint
+	vector<float> distances = {
+		12.5, // to Zephyr Cove
+		13.0, // to Fallen Leaf Lake
+		15.5, // to Rubicon Point
+		16.0, // to Tahoe City
+		13.5, // to Carnelian Bay
+		14.0, // to Sand Harbor
+		17.5, // to Spooner Lake
+	};
+
+	// name of and distance to next checkpoint
 	int sceneIndex;
+	int distanceIndex;
 
 	//--------------------------------------------------------------------------
 	// crash scenes
@@ -58,6 +69,7 @@ public:
 	//--------------------------------------------------------------------------
 	RaceScenery() {
 		sceneIndex = 0;
+		distanceIndex = 0;
 		srand((unsigned int)time(0));
 	}
 
@@ -73,6 +85,13 @@ public:
 	//--------------------------------------------------------------------------
 	string& getNextScene() {
 		return scenery.at(sceneIndex++);
+	}
+
+	//--------------------------------------------------------------------------
+	// return distance to next checkpoint
+	//--------------------------------------------------------------------------
+	float getNextDistance() {
+		return distances.at(distanceIndex++);
 	}
 
 	//--------------------------------------------------------------------------
@@ -95,6 +114,14 @@ public:
 	string& getRandomCrash() {
 		int index = rand() % crashes.size();
 		return crashes.at(index);
+	}
+
+	//--------------------------------------------------------------------------
+	// reset scenery and distances vectors
+	//--------------------------------------------------------------------------
+	void reset() {
+		sceneIndex = 0;
+		distanceIndex = 0;
 	}
 };
 #endif // RACESCENERY_H
