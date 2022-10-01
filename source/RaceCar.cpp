@@ -26,8 +26,7 @@ RaceCar::RaceCar(const string& year, const string& make, const string& model) :
 	Car(year, make, model) {
 
 	srand((unsigned int) time(0));
-	speed = 0;
-	crash = false;
+	reset();
 }
 
 //------------------------------------------------------------------------------
@@ -55,8 +54,10 @@ void RaceCar::setSpeed(int speed) {
 // returns miles actually driven given fuel remaining
 //------------------------------------------------------------------------------
 int RaceCar::setRandomSpeed(int minSpeed, int maxSpeed) {
-	speed = rand() % (maxSpeed - minSpeed) + minSpeed;
+	int range = maxSpeed - minSpeed + 1;
+	speed = rand() % range + minSpeed;
 	speedLog.push_back(speed);
+
 	return speed;
 }
 
@@ -96,9 +97,10 @@ float RaceCar::getAverageSpeed() {
 // resets car data
 //------------------------------------------------------------------------------
 void RaceCar::reset() {
-	speedLog.clear();
 	odo.reset();
 	crash = false;
-	speed = rand() % (MAX_SPEED - MIN_SPEED) + MIN_SPEED;
+
+	speed = rand() % (MAX_SPEED - MIN_SPEED + 1) + MIN_SPEED;
+	speedLog.clear();
 	speedLog.push_back(speed);
 }
