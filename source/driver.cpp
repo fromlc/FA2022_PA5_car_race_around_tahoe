@@ -60,6 +60,7 @@ int main() {
 	preRace();
 	// race until user quits
 	raceLoop();
+
 	return 0;
 }
 
@@ -67,9 +68,7 @@ int main() {
 // pre-race display
 //------------------------------------------------------------------------------
 void preRace() {
-	cout << CYAN;
-	cout << "\nRACE AROUND LAKE TAHOE\n\n";
-	cout << RESET_COLORS;
+	cout << CYAN << "\nRACE AROUND LAKE TAHOE\n\n" << RESET_COLORS;
 
 	// car descriptions
 	cout << "Stock " << g_c1.getDescription() << " takes on souped-up ";
@@ -197,7 +196,6 @@ void declareWinner() {
 	cout << rc2Desc << " drove "
 		<< g_c2.getMilesDriven() << " miles. Average speed: "
 		<< rc2Avg << " mph\n";
-
 	cout << "\n";
 }
 

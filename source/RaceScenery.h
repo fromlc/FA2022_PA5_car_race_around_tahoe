@@ -21,7 +21,7 @@ using std::vector;
 class RaceScenery {
 private:
 	//--------------------------------------------------------------------------
-	// race checkpoints
+	// race checkpoints and distances between them
 	//--------------------------------------------------------------------------
 	vector<string> scenery = {
 		"Zephyr Cove",
@@ -40,10 +40,10 @@ private:
 		16.0, // from Rubicon Point to Tahoe City
 		13.5, // from Tahoe City to Carnelian Bay
 		14.0, // from Carnelian Bay to Sand Harbor
-		17.5, // to Spooner Lake
+		17.5, // from Sand Harbor to Spooner Lake
 	};
 
-	// name of and distance to next checkpoint
+	// indexes for name of and distance to next checkpoint
 	int sceneIndex;
 	int distanceIndex;
 
@@ -71,7 +71,7 @@ public:
 	}
 
 	//--------------------------------------------------------------------------
-	// return reference to next checkpoint description
+	// return number of scenes in vector
 	//--------------------------------------------------------------------------
 	int getSceneCount() {
 		return (int) scenery.size();
