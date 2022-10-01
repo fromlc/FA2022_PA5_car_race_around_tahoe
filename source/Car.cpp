@@ -29,7 +29,22 @@ Car::Car(const string& year, const string& make, const string& model) {
 }
 
 //------------------------------------------------------------------------------
+// return car's make
+//------------------------------------------------------------------------------
+const string& Car::getMake() const { return make; }
+
+//------------------------------------------------------------------------------
+// returns car's model
+//------------------------------------------------------------------------------
+const string& Car::getModel() const { return model; }
+
+//------------------------------------------------------------------------------
+// returns car's year
+//------------------------------------------------------------------------------
+const string& Car::getYear() const { return year; }
+//------------------------------------------------------------------------------
 // pretty print car description
+// derived class version will override this virtual function
 //------------------------------------------------------------------------------
 string& Car::getDescription() {
 	return description;

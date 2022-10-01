@@ -32,7 +32,13 @@ public:
 	Car(const string& year, const string& make, const string& model);
 
 	// getters
+	const string& getMake() const;
+	const string& getModel() const;
+	const string& getYear() const;
+	// derived class getter will override this one
 	virtual string& getDescription();
+
+	// util
 	float getMilesDriven() const;
 
 	//----------------------------------------------------------------------

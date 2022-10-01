@@ -26,8 +26,8 @@ using std::vector;
 // constexpr int MILES_TO_CHECKPOINT = 10;
 constexpr int MIN_SPEED = 60;
 constexpr int MAX_SPEED = 80;
-// higher crash factor makes crashes more likely
-constexpr int CRASH_FACTOR = 5;
+// crash factor <= 10, higher means more crashes
+constexpr int CRASH_FACTOR = 3;
 
 //------------------------------------------------------------------------------
 // globals
@@ -133,7 +133,7 @@ void race() {
 void driveStage(RaceCar& rc, float miles) {
 
 	int speed = rc.getSpeed();
-	cout << rc.getDescription() << " averaged " << speed << " mph";
+	cout << "The " << rc.getModel() << " averaged " << speed << " mph";
 
 	// speed too high -> drive part way to checkpoint
 	if (speed > MAX_SPEED) {
@@ -160,8 +160,8 @@ void declareWinner() {
 	float rc1Avg = g_c1.getAverageSpeed();
 	float rc2Avg = g_c2.getAverageSpeed();
 
-	string rc1Desc = g_c1.getDescription();
-	string rc2Desc = g_c2.getDescription();
+	string rc1Model = g_c1.getModel();
+	string rc2Model = g_c2.getModel();
 
 	// winner has fastest average speed with no crash
 	if (rc1Crash && rc2Crash) {
@@ -169,20 +169,20 @@ void declareWinner() {
 			<< RESET_COLORS;
 	}
 	else if (rc1Crash) {
-		cout << YELLOW << "The " << rc2Desc << " won!" << RESET_COLORS;
-		cout << "\nThe poor mangled " << rc1Desc
+		cout << YELLOW << "The " << rc2Model << " won!" << RESET_COLORS;
+		cout << "\nThe poor mangled " << rc1Model
 			<< " is waiting for a tow truck.\n";
 	}
 	else if (rc2Crash) {
-		cout << YELLOW << "The " << rc1Desc << " won!" << RESET_COLORS;
-		cout << "\nWhat's left of the " << rc2Desc
+		cout << YELLOW << "The " << rc2Model << " won!" << RESET_COLORS;
+		cout << "\nWhat's left of the " << rc1Model
 			<< " is sadly hanging from a stinger.\n";
 	}
 	else if (rc1Avg > rc2Avg) {
-		cout << YELLOW << rc1Desc << " won!\n" << RESET_COLORS;
+		cout << YELLOW << rc1Model << " won!\n" << RESET_COLORS;
 	}
 	else if (rc2Avg > rc1Avg) {
-		cout << YELLOW << rc2Desc << " won!\n" << RESET_COLORS;
+		cout << YELLOW << rc2Model << " won!\n" << RESET_COLORS;
 	}
 	else {
 		cout << GREEN << "It's a dead heat!\n" << RESET_COLORS;
@@ -190,10 +190,10 @@ void declareWinner() {
 
 	// display distances driven and average speeds
 	cout << "\n";
-	cout << rc1Desc << " drove "
+	cout << "The " << rc1Model << " drove "
 		<< g_c1.getMilesDriven() << " miles. Average speed: "
 		<< rc1Avg << " mph\n";
-	cout << rc2Desc << " drove "
+	cout << "The " << rc2Model << " drove "
 		<< g_c2.getMilesDriven() << " miles. Average speed: "
 		<< rc2Avg << " mph\n";
 	cout << "\n";
