@@ -22,3 +22,8 @@ float Odometer::getMilesDriven() const { return milesDriven; }
 // adds miles to the odometer reading (number of miles driven)
 //------------------------------------------------------------------------------
 void Odometer::addMilesDriven(float miles) { milesDriven += miles; };
+
+//------------------------------------------------------------------------------
+// resets miles driven to zero
+//------------------------------------------------------------------------------
+void Odometer::reset() { milesDriven = 0; };

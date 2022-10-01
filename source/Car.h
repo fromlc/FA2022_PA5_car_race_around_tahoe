@@ -32,6 +32,7 @@ public:
 	Car(const string& year, const string& make, const string& model);
 
 	// getters
+	virtual string& getDescription();
 	float getMilesDriven() const;
 
 	//----------------------------------------------------------------------
@@ -52,8 +53,8 @@ public:
 	// returns number of miles remaining given fuel level
 	float canDriveMiles() const;
 
-	// pretty print car description
-	virtual string& getDescription();
+	// reset number of miles driven to zero
+	void resetMilesDriven();
 };
 #endif	// CAR_H
 

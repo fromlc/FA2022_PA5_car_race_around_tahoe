@@ -21,5 +21,8 @@ public:
 
 	// setters
 	void addMilesDriven(float miles);
+
+	// util
+	void reset();
 };
 #endif	// ODOMETER_H

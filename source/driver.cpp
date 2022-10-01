@@ -11,6 +11,16 @@
 #include "RaceScenery.h"
 
 //------------------------------------------------------------------------------
+// using symbols
+//------------------------------------------------------------------------------
+using std::cin;
+using std::cout;
+using std::fixed;
+using std::setprecision;
+using std::showpoint;
+using std::vector;
+
+//------------------------------------------------------------------------------
 // constants
 //------------------------------------------------------------------------------
 // constexpr int MILES_TO_CHECKPOINT = 10;
@@ -27,26 +37,18 @@ RaceCar g_c2("1965", "Ford", "Mustang");
 RaceScenery g_scenery;
 
 //------------------------------------------------------------------------------
-// using symbols
-//------------------------------------------------------------------------------
-using std::cout;
-using std::fixed;
-using std::setprecision;
-using std::showpoint;
-using std::vector;
-
-//------------------------------------------------------------------------------
 // local function prototypes
 //------------------------------------------------------------------------------
 void preRace();
+void raceLoop();
 void race();
 void driveStage(RaceCar& rc, float miles);
 void declareWinner();
 
-// call RaceCar method for both cars
-inline void fillUp();
+// inline functions call RaceCar method for both cars
 inline void driveStage(float miles);
 inline void setRandomSpeed();
+inline void reset();
 
 //------------------------------------------------------------------------------
 // entry point
@@ -54,14 +56,10 @@ inline void setRandomSpeed();
 int main() {
 	// set numeric display format
 	cout << setprecision(1) << fixed << showpoint;
-
 	// display banner, car info
 	preRace();
-
-	// let's drive!
-	race();
-	declareWinner();
-
+	// race until user quits
+	raceLoop();
 	return 0;
 }
 
@@ -80,24 +78,41 @@ void preRace() {
 	// races starts and ends at last checkpoint
 	cout << "\nThe race starts and ends at "
 		<< g_scenery.getLastScene() << ".\n";
-	// gas up both cars
-	fillUp();
-	cout << "Both cars are gassed up and ready to go!\n\n";
 }
 
 //------------------------------------------------------------------------------
-// run the race loop
+// run races until user quits
+//------------------------------------------------------------------------------
+void raceLoop() {
+
+	char chCmd = 'y';
+	while (chCmd == 'y' || chCmd == 'Y') {
+		// clear crash flags, gas up, zero miles driven
+		reset();
+		// drive!
+		race();
+		declareWinner();
+
+		cout << YELLOW << "Race again (y/n)? " << RESET_COLORS;
+		cin >> chCmd;
+		cout << "\n";
+	}
+
+	cout << "Goodbye!\n\n";
+}
+
+//------------------------------------------------------------------------------
+// run one race
 //------------------------------------------------------------------------------
 void race() {
 	int sceneCount = g_scenery.getSceneCount();
 
 	for (int i = 0; i < sceneCount; i++) {
 
-		// miles to next checkpoint
+		// set out on next stage
 		float miles = g_scenery.getNextDistance();
 
-		// set out for next checkpoint
-		cout << CYAN << "Stage " << i + 1 << ": " 
+		cout << CYAN << "Stage " << i + 1 << ": "
 			<< miles << " miles to " << g_scenery.getNextScene()
 			<< RESET_COLORS << "\n";
 
@@ -120,13 +135,13 @@ void driveStage(RaceCar& rc, float miles) {
 
 	int speed = rc.getSpeed();
 	cout << rc.getDescription() << " averaged " << speed << " mph";
-	 
+
 	// speed too high -> drive part way to checkpoint
 	if (speed > MAX_SPEED) {
 		cout << " but it " << RED << "CRASHED!@!" << RESET_COLORS <<
 			" It " << g_scenery.getRandomCrash() << ".\n";
 
-		rc.drive((float)(rand() % (int) miles));
+		rc.drive((float)(rand() % (int)miles));
 		rc.setCrash();
 		return;
 	}
@@ -156,13 +171,13 @@ void declareWinner() {
 	}
 	else if (rc1Crash) {
 		cout << YELLOW << "The " << rc2Desc << " won!" << RESET_COLORS;
-		cout << "\nThe poor mangled " << rc1Desc 
+		cout << "\nThe poor mangled " << rc1Desc
 			<< " is waiting for a tow truck.\n";
 	}
 	else if (rc2Crash) {
 		cout << YELLOW << "The " << rc1Desc << " won!" << RESET_COLORS;
-		cout << "\nWhat's left of the " << rc2Desc 
-			<< " is sadly hanging from a stinger.\n\n";
+		cout << "\nWhat's left of the " << rc2Desc
+			<< " is sadly hanging from a stinger.\n";
 	}
 	else if (rc1Avg > rc2Avg) {
 		cout << YELLOW << rc1Desc << " won!\n" << RESET_COLORS;
@@ -191,14 +206,6 @@ void declareWinner() {
 }
 
 //------------------------------------------------------------------------------
-// inline functions call RaceCar method for both cars
-//------------------------------------------------------------------------------
-inline void fillUp() {
-	g_c1.fillUp();
-	g_c2.fillUp();
-}
-
-//------------------------------------------------------------------------------
 inline void driveStage(float miles) {
 	driveStage(g_c1, miles);
 	driveStage(g_c2, miles);
@@ -208,4 +215,16 @@ inline void driveStage(float miles) {
 inline void setRandomSpeed() {
 	g_c1.setRandomSpeed(MIN_SPEED, MAX_SPEED + CRASH_FACTOR);
 	g_c2.setRandomSpeed(MIN_SPEED, MAX_SPEED + CRASH_FACTOR);
+}
+
+inline void reset() {
+	g_scenery.reset();
+	// zero miles driven
+	g_c1.reset();
+	g_c2.reset();
+	// gas up both cars
+	g_c1.fillUp();
+	g_c2.fillUp();
+
+	cout << "Both cars are gassed up and ready to go!\n\n";
 }

@@ -42,8 +42,6 @@ public:
 	// util
 	int setRandomSpeed(int minSpeed, int maxSpeed);
 	float getAverageSpeed();
+	void reset();
 };
 #endif	// RACECAR_H
-
-
-
