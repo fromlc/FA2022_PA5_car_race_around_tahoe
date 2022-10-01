@@ -179,10 +179,10 @@ void declareWinner() {
 			<< " is sadly hanging from a stinger.\n";
 	}
 	else if (rc1Avg > rc2Avg) {
-		cout << YELLOW << rc1Model << " won!\n" << RESET_COLORS;
+		cout << "The " << YELLOW << rc1Model << " won!\n" << RESET_COLORS;
 	}
 	else if (rc2Avg > rc1Avg) {
-		cout << YELLOW << rc2Model << " won!\n" << RESET_COLORS;
+		cout << "The " << YELLOW << rc2Model << " won!\n" << RESET_COLORS;
 	}
 	else {
 		cout << GREEN << "It's a dead heat!\n" << RESET_COLORS;
