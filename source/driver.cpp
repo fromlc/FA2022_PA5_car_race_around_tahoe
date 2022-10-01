@@ -72,7 +72,7 @@ void preRace() {
 	cout << RESET_COLORS;
 
 	// car descriptions
-	cout << "A stock " << g_c1.getDescription() << " takes on a souped ";
+	cout << "Stock " << g_c1.getDescription() << " takes on souped-up ";
 	cout << g_c2.getDescription() << ".\n";
 
 	// races starts and ends at last checkpoint
@@ -189,19 +189,15 @@ void declareWinner() {
 		cout << GREEN << "It's a dead heat!\n" << RESET_COLORS;
 	}
 
-	// display distances driven
+	// display distances driven and average speeds
 	cout << "\n";
 	cout << rc1Desc << " drove "
-		<< g_c1.getMilesDriven() << " miles.\n";
-	cout << rc2Desc << " drove "
-		<< g_c2.getMilesDriven() << " miles.\n";
-
-	// display average speeds
-	cout << "\n";
-	cout << rc1Desc << " average speed: "
+		<< g_c1.getMilesDriven() << " miles. Average speed: "
 		<< rc1Avg << " mph\n";
-	cout << rc2Desc << " average speed: "
+	cout << rc2Desc << " drove "
+		<< g_c2.getMilesDriven() << " miles. Average speed: "
 		<< rc2Avg << " mph\n";
+
 	cout << "\n";
 }
 
