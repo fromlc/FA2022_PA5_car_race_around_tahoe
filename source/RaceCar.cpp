@@ -35,7 +35,7 @@ RaceCar::RaceCar(const string& year, const string& make, const string& model) :
 //------------------------------------------------------------------------------
 float RaceCar::drive(float miles) {
 	float driven = fg.driveMiles(miles);
-	odo.addMilesDriven(driven);
+	odo.addTripMiles(driven);
 
 	return driven;
 }
@@ -99,8 +99,8 @@ float RaceCar::getAverageSpeed() {
 void RaceCar::reset() {
 	odo.reset();
 	crash = false;
+	speedLog.clear();
 
 	speed = rand() % (MAX_SPEED - MIN_SPEED + 1) + MIN_SPEED;
-	speedLog.clear();
 	speedLog.push_back(speed);
 }
