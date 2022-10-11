@@ -54,7 +54,7 @@ string& Car::getDescription() {
 // returns number of miles on Tripmeter
 //------------------------------------------------------------------------------
 float Car::getMilesDriven() const {
-	return odo.getMilesDriven();
+	return odo.getTripMiles();
 }
 
 //------------------------------------------------------------------------------
@@ -80,8 +80,3 @@ float Car::readFuelGauge() const { return fg.getGallonsLeft(); }
 // returns number of miles remaining given fuel level
 //------------------------------------------------------------------------------
 float Car::canDriveMiles() const { return fg.canDriveMiles(); }
-
-//------------------------------------------------------------------------------
-// resets number of miles driven to zero
-//------------------------------------------------------------------------------
-//void Car::resetMilesDriven() { odo.reset(); }

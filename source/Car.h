@@ -58,8 +58,5 @@ public:
 
 	// returns number of miles remaining given fuel level
 	float canDriveMiles() const;
-
-	// reset number of miles driven to zero
-	void resetMilesDriven();
 };
 #endif	// CAR_H
