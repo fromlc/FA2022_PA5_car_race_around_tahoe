@@ -15,7 +15,7 @@
 using std::string;
 
 //----------------------------------------------------------------------
-// Car
+// Car : abstract base class
 //----------------------------------------------------------------------
 class Car {
 protected:
@@ -32,6 +32,13 @@ public:
 	Car(const string& year, const string& make, const string& model);
 
 	// getters
+	const string& getMake() const;
+	const string& getModel() const;
+	const string& getYear() const;
+	// derived class getter will override this one
+	virtual string& getDescription();
+
+	// util
 	float getMilesDriven() const;
 
 	//----------------------------------------------------------------------
@@ -52,8 +59,7 @@ public:
 	// returns number of miles remaining given fuel level
 	float canDriveMiles() const;
 
-	// pretty print car description
-	virtual string& getDescription();
+	// reset number of miles driven to zero
+	void resetMilesDriven();
 };
 #endif	// CAR_H
-

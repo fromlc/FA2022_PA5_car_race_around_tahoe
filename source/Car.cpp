@@ -29,6 +29,35 @@ Car::Car(const string& year, const string& make, const string& model) {
 }
 
 //------------------------------------------------------------------------------
+// return car's make
+//------------------------------------------------------------------------------
+const string& Car::getMake() const { return make; }
+
+//------------------------------------------------------------------------------
+// returns car's model
+//------------------------------------------------------------------------------
+const string& Car::getModel() const { return model; }
+
+//------------------------------------------------------------------------------
+// returns car's year
+//------------------------------------------------------------------------------
+const string& Car::getYear() const { return year; }
+//------------------------------------------------------------------------------
+// pretty print car description
+// derived class version will override this virtual function
+//------------------------------------------------------------------------------
+string& Car::getDescription() {
+	return description;
+}
+
+//------------------------------------------------------------------------------
+// returns number of miles on odometer
+//------------------------------------------------------------------------------
+float Car::getMilesDriven() const {
+	return odo.getMilesDriven();
+}
+
+//------------------------------------------------------------------------------
 // add enough fuel to fill up the tank, return gallons added
 //------------------------------------------------------------------------------
 float Car::fillUp() {
@@ -43,13 +72,6 @@ float Car::addFuel(float gallons) {
 }
 
 //------------------------------------------------------------------------------
-// returns number of miles on odometer
-//------------------------------------------------------------------------------
-float Car::getMilesDriven() const {
-	return odo.getMilesDriven();
-}
-
-//------------------------------------------------------------------------------
 // returns number of fuel gallons remaining
 //------------------------------------------------------------------------------
 float Car::readFuelGauge() const { return fg.getGallonsLeft(); }
@@ -60,8 +82,6 @@ float Car::readFuelGauge() const { return fg.getGallonsLeft(); }
 float Car::canDriveMiles() const { return fg.canDriveMiles(); }
 
 //------------------------------------------------------------------------------
-// pretty print car description
+// resets number of miles driven to zero
 //------------------------------------------------------------------------------
-string& Car::getDescription() {
-	return description;
-}
+void Car::resetMilesDriven() { odo.reset(); }
