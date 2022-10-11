@@ -6,7 +6,7 @@
 
 #include <string>
 
-#include "Odometer.h"
+#include "Tripmeter.h"
 #include "FuelGauge.h"
 
 //------------------------------------------------------------------------------
@@ -23,7 +23,7 @@ protected:
 	string model;
 	string year;
 	string description;
-	Odometer odo;
+	Tripmeter odo;
 	FuelGauge fg;
 
 public:

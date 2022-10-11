@@ -44,7 +44,7 @@ void driveStage(RaceCar& rc, float miles);
 void declareWinner();
 
 // call RaceCar method for both cars
-inline void fillUp();
+inline void reset();
 inline void driveStage(float miles);
 inline void setRandomSpeed();
 
@@ -52,6 +52,7 @@ inline void setRandomSpeed();
 // entry point
 //------------------------------------------------------------------------------
 int main() {
+
 	// set numeric display format
 	cout << setprecision(1) << fixed << showpoint;
 
@@ -80,8 +81,9 @@ void preRace() {
 	// races starts and ends at last checkpoint
 	cout << "\nThe race starts and ends at "
 		<< g_scenery.getLastScene() << ".\n";
-	// gas up both cars
-	fillUp();
+	// set up next race
+	reset();
+
 	cout << "Both cars are gassed up and ready to go!\n\n";
 }
 
@@ -149,26 +151,29 @@ void declareWinner() {
 	string rc1Desc = g_c1.getDescription();
 	string rc2Desc = g_c2.getDescription();
 
+	string rc1Model = g_c1.getModel();
+	string rc2Model = g_c2.getModel();
+
 	// winner has fastest average speed with no crash
 	if (rc1Crash && rc2Crash) {
 		cout << YELLOW << "No winner - both cars crashed.\n"
 			<< RESET_COLORS;
 	}
 	else if (rc1Crash) {
-		cout << YELLOW << "The " << rc2Desc << " won!" << RESET_COLORS;
-		cout << "\nThe poor mangled " << rc1Desc 
-			<< " is waiting for a tow truck.\n";
+		cout << YELLOW << "The " << rc2Model << " won!" << RESET_COLORS;
+		cout << "\nThe poor mangled " << rc1Model
+			<< g_scenery.getRandomAftermath() << "\n";
 	}
 	else if (rc2Crash) {
-		cout << YELLOW << "The " << rc1Desc << " won!" << RESET_COLORS;
-		cout << "\nWhat's left of the " << rc2Desc 
-			<< " is sadly hanging from a stinger.\n\n";
+		cout << YELLOW << "The " << rc2Model << " won!" << RESET_COLORS;
+		cout << "\nWhat's left of the " << rc2Model
+			<< g_scenery.getRandomAftermath() << "\n";
 	}
 	else if (rc1Avg > rc2Avg) {
-		cout << YELLOW << rc1Desc << " won!\n" << RESET_COLORS;
+		cout << YELLOW << rc1Model << " won!\n" << RESET_COLORS;
 	}
 	else if (rc2Avg > rc1Avg) {
-		cout << YELLOW << rc2Desc << " won!\n" << RESET_COLORS;
+		cout << YELLOW << rc2Model << " won!\n" << RESET_COLORS;
 	}
 	else {
 		cout << GREEN << "It's a dead heat!\n" << RESET_COLORS;
@@ -191,13 +196,7 @@ void declareWinner() {
 }
 
 //------------------------------------------------------------------------------
-// inline functions call RaceCar method for both cars
-//------------------------------------------------------------------------------
-inline void fillUp() {
-	g_c1.fillUp();
-	g_c2.fillUp();
-}
-
+// inline functions
 //------------------------------------------------------------------------------
 inline void driveStage(float miles) {
 	driveStage(g_c1, miles);
@@ -208,4 +207,17 @@ inline void driveStage(float miles) {
 inline void setRandomSpeed() {
 	g_c1.setRandomSpeed(MIN_SPEED, MAX_SPEED + CRASH_FACTOR);
 	g_c2.setRandomSpeed(MIN_SPEED, MAX_SPEED + CRASH_FACTOR);
+}
+
+//------------------------------------------------------------------------------
+inline void reset() {
+	g_scenery.reset();
+	// zero miles driven
+	g_c1.reset();
+	g_c2.reset();
+	// gas up both cars
+	g_c1.fillUp();
+	g_c2.fillUp();
+
+	cout << "Both cars are gassed up and ready to go!\n\n";
 }

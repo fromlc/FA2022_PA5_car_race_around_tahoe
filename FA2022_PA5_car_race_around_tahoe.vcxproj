@@ -138,6 +138,7 @@
     <ClInclude Include="source\Odometer.h" />
     <ClInclude Include="source\RaceCar.h" />
     <ClInclude Include="source\RaceScenery.h" />
+    <ClInclude Include="source\Tripmeter.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
