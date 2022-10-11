@@ -13,11 +13,11 @@ private:
 
 public:
 	// constructors
-	Odometer();
-	Odometer(float initialMiles);
+	Odometer() : Odometer(0.0) {}
+	Odometer(float initialMiles) { milesDriven = initialMiles; }
 
 	// getters
-	float getMilesDriven() const;
+	float getMilesDriven() const { return milesDriven; }
 
 	// setters
 	void addMilesDriven(float miles);
