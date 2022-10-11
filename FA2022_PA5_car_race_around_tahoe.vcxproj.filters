@@ -38,13 +38,16 @@
     <ClInclude Include="source\FuelGauge.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="source\Odometer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="source\RaceCar.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="source\RaceScenery.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\ansi_colors.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Odometer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

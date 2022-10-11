@@ -130,7 +130,6 @@
     <ClCompile Include="source\Car.cpp" />
     <ClCompile Include="source\driver.cpp" />
     <ClCompile Include="source\FuelGauge.cpp" />
-    <ClCompile Include="source\Odometer.cpp" />
     <ClCompile Include="source\RaceCar.cpp" />
   </ItemGroup>
   <ItemGroup>
