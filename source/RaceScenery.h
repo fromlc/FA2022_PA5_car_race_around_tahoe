@@ -21,7 +21,7 @@ using std::vector;
 class RaceScenery {
 private:
 	//--------------------------------------------------------------------------
-	// race checkpoints
+	// race checkpoints and distances between them
 	//--------------------------------------------------------------------------
 	vector<string> scenery = {
 		"Zephyr Cove",
@@ -40,10 +40,10 @@ private:
 		16.0, // from Rubicon Point to Tahoe City
 		13.5, // from Tahoe City to Carnelian Bay
 		14.0, // from Carnelian Bay to Sand Harbor
-		17.5, // to Spooner Lake
+		17.5, // from Sand Harbor to Spooner Lake
 	};
 
-	// name of and distance to next checkpoint
+	// indexes for name of and distance to next checkpoint
 	int sceneIndex;
 	int distanceIndex;
 
@@ -60,6 +60,15 @@ private:
 		"skidded on gravel and spun out",
 	};
 
+	vector<string> aftermaths = {
+		" is sadly hanging from a stinger.",
+		" is waiting for a tow truck.",
+		" is half-submerged in the lake.",
+		" is upside down, wheels still spinning.",
+		" just blew up.",
+		" is waiting for the insurance adjustor.",
+	};
+
 public:
 	//--------------------------------------------------------------------------
 	// constructor
@@ -71,7 +80,7 @@ public:
 	}
 
 	//--------------------------------------------------------------------------
-	// return reference to next checkpoint description
+	// return number of scenes in vector
 	//--------------------------------------------------------------------------
 	int getSceneCount() {
 		return (int) scenery.size();
@@ -111,6 +120,14 @@ public:
 	string& getRandomCrash() {
 		int index = rand() % crashes.size();
 		return crashes.at(index);
+	}
+
+	//--------------------------------------------------------------------------
+	// return reference to random crash aftermath
+	//--------------------------------------------------------------------------
+	string& getRandomAftermath() {
+		int index = rand() % aftermaths.size();
+		return aftermaths.at(index);
 	}
 
 	//--------------------------------------------------------------------------
