@@ -28,7 +28,8 @@ public:
 	void addMilesDriven(float miles) {
 		// get integer and fractional parts
 		int iMiles = (int)(milesDriven + miles);
-		float fraction = milesDriven - iMiles;
+		float fMiles = milesDriven + miles;
+		float fraction = fMiles - iMiles;
 
 		// roll over or not
 		iMiles = iMiles % MAX_MILESDRIVEN;
