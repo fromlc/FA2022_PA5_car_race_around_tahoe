@@ -29,6 +29,7 @@ RaceScenery g_scenery;
 //------------------------------------------------------------------------------
 // using symbols
 //------------------------------------------------------------------------------
+using std::cin;
 using std::cout;
 using std::fixed;
 using std::setprecision;
@@ -39,6 +40,7 @@ using std::vector;
 // local function prototypes
 //------------------------------------------------------------------------------
 void preRace();
+void raceLoop();
 void race();
 void driveStage(RaceCar& rc, float miles);
 void declareWinner();
@@ -61,7 +63,8 @@ int main() {
 
 	// let's drive!
 	race();
-	declareWinner();
+	// race until user quits
+	raceLoop();
 
 	return 0;
 }
@@ -88,7 +91,28 @@ void preRace() {
 }
 
 //------------------------------------------------------------------------------
-// run the race loop
+// run races until user quits
+//------------------------------------------------------------------------------
+void raceLoop() {
+
+	char chCmd = 'y';
+	while (chCmd == 'y' || chCmd == 'Y') {
+		// clear crash flags, gas up, zero miles driven
+		reset();
+		// drive!
+		race();
+		declareWinner();
+
+		cout << YELLOW << "Race again (y/n)? " << RESET_COLORS;
+		cin >> chCmd;
+		cout << "\n";
+	}
+
+	cout << "Goodbye!\n\n";
+}
+
+//------------------------------------------------------------------------------
+// run one race
 //------------------------------------------------------------------------------
 void race() {
 	int sceneCount = g_scenery.getSceneCount();
@@ -127,7 +151,7 @@ void driveStage(RaceCar& rc, float miles) {
 	if (speed > MAX_SPEED) {
 		cout << " but it " << RED << "CRASHED!@!" << RESET_COLORS <<
 			" It " << g_scenery.getRandomCrash() 
-			<< YELLOW << ". Everybody's OK!\n" << RESET_COLORS;
+			<< ". Everybody's OK!\n";
 
 		rc.drive((float)(rand() % (int) miles));
 		rc.setCrash();
@@ -168,7 +192,7 @@ void declareWinner() {
 			<< g_scenery.getRandomAftermath() << "\n";
 	}
 	else if (rc2Crash) {
-		cout << YELLOW << "The " << rc2Model << " won!" << RESET_COLORS;
+		cout << YELLOW << "The " << rc1Model << " won!" << RESET_COLORS;
 		cout << "\nWhat's left of the " << rc2Model
 			<< g_scenery.getRandomAftermath() << "\n";
 	}
