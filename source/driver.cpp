@@ -121,15 +121,18 @@ void race() {
 void driveStage(RaceCar& rc, float miles) {
 
 	int speed = rc.getSpeed();
-	cout << rc.getDescription() << " averaged " << speed << " mph";
+	cout << rc.getModel() << " averaged " << speed << " mph";
 	 
 	// speed too high -> drive part way to checkpoint
 	if (speed > MAX_SPEED) {
 		cout << " but it " << RED << "CRASHED!@!" << RESET_COLORS <<
-			" It " << g_scenery.getRandomCrash() << ".\n";
+			" It " << g_scenery.getRandomCrash() 
+			<< YELLOW << ". Everybody's OK!\n" << RESET_COLORS;
 
 		rc.drive((float)(rand() % (int) miles));
 		rc.setCrash();
+
+
 		return;
 	}
 
