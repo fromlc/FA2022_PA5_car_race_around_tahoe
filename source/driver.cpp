@@ -155,7 +155,6 @@ void driveStage(RaceCar& rc, float miles) {
 		rc.drive((float)(rand() % (int) miles));
 		rc.setCrash();
 
-
 		return;
 	}
 
