@@ -55,14 +55,9 @@ inline void setRandomSpeed();
 //------------------------------------------------------------------------------
 int main() {
 
-	// set numeric display format
-	cout << setprecision(1) << fixed << showpoint;
-
 	// display banner, car info
 	preRace();
 
-	// let's drive!
-	race();
 	// race until user quits
 	raceLoop();
 
@@ -73,6 +68,10 @@ int main() {
 // pre-race display
 //------------------------------------------------------------------------------
 void preRace() {
+	// set numeric display format
+	cout << setprecision(1) << fixed << showpoint;
+
+	// banner
 	cout << CYAN;
 	cout << "\nRACE AROUND LAKE TAHOE\n\n";
 	cout << RESET_COLORS;
@@ -245,6 +244,4 @@ inline void reset() {
 	// gas up both cars
 	g_c1.fillUp();
 	g_c2.fillUp();
-
-	cout << "Both cars are gassed up and ready to go!\n\n";
 }
