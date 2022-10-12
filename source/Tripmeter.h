@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------
-// Tripmeter : class declaration
+// Tripmeter : class declaration and definition
 //------------------------------------------------------------------------------
 #ifndef TRIPMETER_H
 #define TRIPMETER_H
@@ -14,7 +14,7 @@ private:
 	float tripMiles;
 
 public:
-	// constructors
+	// constructor
 	Tripmeter() : Odometer(0.0) { reset(); }
 
 	// getters
