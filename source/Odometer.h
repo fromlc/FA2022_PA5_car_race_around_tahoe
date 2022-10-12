@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------
-// Odometer : class declaration
+// Odometer : class declaration and definition
 //------------------------------------------------------------------------------
 #ifndef ODOMETER_H
 #define ODOMETER_H
@@ -34,7 +34,7 @@ public:
 		// roll over or not
 		iMiles = iMiles % MAX_MILESDRIVEN;
 
-		// tack on decimal part
+		// tack on fractional part
 		milesDriven = iMiles + fraction;
 	}
 };
