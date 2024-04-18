@@ -23,7 +23,7 @@ private:
 	//--------------------------------------------------------------------------
 	// race checkpoints and distances between them
 	//--------------------------------------------------------------------------
-	vector<string> scenery = {
+	vector<string> checkpoints = {
 		"Zephyr Cove",
 		"Fallen Leaf Lake",
 		"Rubicon Point",
@@ -83,14 +83,14 @@ public:
 	// return number of scenes in vector
 	//--------------------------------------------------------------------------
 	int getSceneCount() {
-		return (int) scenery.size();
+		return (int) checkpoints.size();
 	}
 
 	//--------------------------------------------------------------------------
 	// return reference to next checkpoint description
 	//--------------------------------------------------------------------------
 	const string& getNextScene() {
-		return scenery.at(sceneIndex++);
+		return checkpoints.at(sceneIndex++);
 	}
 
 	//--------------------------------------------------------------------------
@@ -104,14 +104,14 @@ public:
 	// return reference to first checkpoint description
 	//--------------------------------------------------------------------------
 	const string& getFirstScene() {
-		return scenery.front();
+		return checkpoints.front();
 	}
 
 	//--------------------------------------------------------------------------
 	// return reference to last checkpoint description
 	//--------------------------------------------------------------------------
 	const string& getLastScene() {
-		return scenery.back();
+		return checkpoints.back();
 	}
 
 	//--------------------------------------------------------------------------
