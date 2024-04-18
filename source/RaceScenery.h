@@ -89,7 +89,7 @@ public:
 	//--------------------------------------------------------------------------
 	// return reference to next checkpoint description
 	//--------------------------------------------------------------------------
-	string& getNextScene() {
+	const string& getNextScene() {
 		return scenery.at(sceneIndex++);
 	}
 
@@ -103,21 +103,21 @@ public:
 	//--------------------------------------------------------------------------
 	// return reference to first checkpoint description
 	//--------------------------------------------------------------------------
-	string& getFirstScene() {
+	const string& getFirstScene() {
 		return scenery.front();
 	}
 
 	//--------------------------------------------------------------------------
 	// return reference to last checkpoint description
 	//--------------------------------------------------------------------------
-	string& getLastScene() {
+	const string& getLastScene() {
 		return scenery.back();
 	}
 
 	//--------------------------------------------------------------------------
 	// return reference to random crash scene
 	//--------------------------------------------------------------------------
-	string& getRandomCrash() {
+	const string& getRandomCrash() {
 		int index = rand() % crashes.size();
 		return crashes.at(index);
 	}
@@ -125,7 +125,7 @@ public:
 	//--------------------------------------------------------------------------
 	// return reference to random crash aftermath
 	//--------------------------------------------------------------------------
-	string& getRandomAftermath() {
+	const string& getRandomAftermath() {
 		int index = rand() % aftermaths.size();
 		return aftermaths.at(index);
 	}
