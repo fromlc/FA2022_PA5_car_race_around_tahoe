@@ -82,7 +82,7 @@ public:
 	//--------------------------------------------------------------------------
 	// return number of scenes in vector
 	//--------------------------------------------------------------------------
-	int getSceneCount() {
+	int getSceneCount() const {
 		return (int) checkpoints.size();
 	}
 
@@ -103,21 +103,21 @@ public:
 	//--------------------------------------------------------------------------
 	// return reference to first checkpoint description
 	//--------------------------------------------------------------------------
-	const string& getFirstScene() {
+	const string& getFirstScene() const {
 		return checkpoints.front();
 	}
 
 	//--------------------------------------------------------------------------
 	// return reference to last checkpoint description
 	//--------------------------------------------------------------------------
-	const string& getLastScene() {
+	const string& getLastScene() const {
 		return checkpoints.back();
 	}
 
 	//--------------------------------------------------------------------------
 	// return reference to random crash scene
 	//--------------------------------------------------------------------------
-	const string& getRandomCrash() {
+	const string& getRandomCrash() const {
 		int index = rand() % crashes.size();
 		return crashes.at(index);
 	}
@@ -125,7 +125,7 @@ public:
 	//--------------------------------------------------------------------------
 	// return reference to random crash aftermath
 	//--------------------------------------------------------------------------
-	const string& getRandomAftermath() {
+	const string& getRandomAftermath() const {
 		int index = rand() % aftermaths.size();
 		return aftermaths.at(index);
 	}
