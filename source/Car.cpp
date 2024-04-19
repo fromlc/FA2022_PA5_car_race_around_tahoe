@@ -52,7 +52,7 @@ float Car::canDriveMiles() { return fg.canDriveMiles(); }
 //------------------------------------------------------------------------------
 // pretty print year, make, model, odometer reading, fuel level, MPG
 //------------------------------------------------------------------------------
-void Car::print() {
+void Car::print() const {
 	cout << "\n" << year << " " << make << " " << model << "\n";
 }
 

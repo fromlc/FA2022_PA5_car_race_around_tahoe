@@ -46,7 +46,7 @@ public:
 	float canDriveMiles();
 
 	// pretty print year, make, model, odometer reading, fuel level, MPG
-	void print();
+	void print() const;
 };
 #endif	// CAR_H
 

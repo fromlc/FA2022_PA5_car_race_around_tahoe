@@ -59,35 +59,35 @@ public:
 	//--------------------------------------------------------------------------
 	// return reference to next checkpoint description
 	//--------------------------------------------------------------------------
-	int getSceneCount() {
-		return scenery.size();
+	int getSceneCount() const {
+		return static_cast<int>(scenery.size());
 	}
 
 	//--------------------------------------------------------------------------
 	// return reference to next checkpoint description
 	//--------------------------------------------------------------------------
-	string& getNextScene() {
+	const string& getNextScene() {
 		return scenery.at(sceneIndex++);
 	}
 
 	//--------------------------------------------------------------------------
 	// return reference to first checkpoint description
 	//--------------------------------------------------------------------------
-	string& getFirstScene() {
+	const string& getFirstScene() const {
 		return scenery.front();
 	}
 
 	//--------------------------------------------------------------------------
 	// return reference to last checkpoint description
 	//--------------------------------------------------------------------------
-	string& getLastScene() {
+	const string& getLastScene() const {
 		return scenery.back();
 	}
 
 	//--------------------------------------------------------------------------
 	// return reference to random crash scene
 	//--------------------------------------------------------------------------
-	string& getRandomCrash() {
+	const string& getRandomCrash() const {
 		int index = rand() % crashes.size();
 		return crashes.at(index);
 	}

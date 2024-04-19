@@ -87,7 +87,8 @@ float race(RaceCar& rc) {
 			cout << "CRASH!@! at " << speed << "mph - "
 				<< scenery.getRandomCrash() << ".\n";
 
-			return totalMiles + rc.drive(rand() % DRIVE_MILES);
+			float randMiles = rc.drive(static_cast<float>(rand() % DRIVE_MILES));
+			return totalMiles + randMiles;
 		}
 
 		// speed ok, log full distance to checkpoint
