@@ -154,7 +154,7 @@ void driveStage(RaceCar& rc, float miles) {
 			" It " << g_scenery.getRandomCrash() 
 			<< ". Everybody's OK!\n";
 
-		rc.drive((float)(rand() % (int) miles));
+		rc.drive(static_cast<float>(rand() % static_cast<int>(miles)));
 		rc.setCrash();
 
 		return;
