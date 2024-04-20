@@ -103,7 +103,7 @@ public:
 	//--------------------------------------------------------------------------
 	// return reference to last checkpoint description
 	//--------------------------------------------------------------------------
-	string& getLastScene() {
+	const string& getLastScene() const {
 		return checkpoints.back();
 	}
 
