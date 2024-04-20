@@ -25,7 +25,7 @@ RaceCar::RaceCar() : RaceCar("2022", "Corvette", "Z-06") {}
 RaceCar::RaceCar(const string& year, const string& make, const string& model) :
 	Car(year, make, model) {
 
-	srand((unsigned int) time(0));
+	srand(static_cast<unsigned int>(time(0)));
 	reset();
 }
 

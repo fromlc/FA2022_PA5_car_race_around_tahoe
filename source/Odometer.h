@@ -27,7 +27,7 @@ public:
 	//--------------------------------------------------------------------------
 	void addMilesDriven(float miles) {
 		// get integer and fractional parts
-		int iMiles = (int)(milesDriven + miles);
+		int iMiles = static_cast<int>(milesDriven + miles);
 		float fMiles = milesDriven + miles;
 		float fraction = fMiles - iMiles;
 
