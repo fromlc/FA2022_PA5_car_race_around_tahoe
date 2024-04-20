@@ -1,6 +1,7 @@
 //------------------------------------------------------------------------------
 // Car : class definition
 //------------------------------------------------------------------------------
+#include <iostream>
 #include <string>
 
 #include "Car.h"
@@ -8,6 +9,7 @@
 //------------------------------------------------------------------------------
 // using symbols
 //------------------------------------------------------------------------------
+using std::cout;
 using std::string;
 
 //------------------------------------------------------------------------------
@@ -76,12 +78,12 @@ float Car::readFuelGauge() const { return fg.getGallonsLeft(); }
 //------------------------------------------------------------------------------
 // returns number of miles remaining given fuel level
 //------------------------------------------------------------------------------
-float Car::canDriveMiles() { return fg.canDriveMiles(); }
+float Car::canDriveMiles() const { return fg.canDriveMiles(); }
 
 //------------------------------------------------------------------------------
 // pretty print year, make, model, odometer reading, fuel level, MPG
 //------------------------------------------------------------------------------
-void Car::print() {
+void Car::print() const {
 	cout << "\n" << year << " " << make << " " << model << "\n";
 }
 

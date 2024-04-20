@@ -94,24 +94,25 @@ public:
 	}
 
 	//--------------------------------------------------------------------------
-	// return distance to next checkpoint
-	//--------------------------------------------------------------------------
-	string& getNextScene() {
-		return scenery.at(sceneIndex++);
-	}
-
-	//--------------------------------------------------------------------------
 	// return reference to first checkpoint description
 	//--------------------------------------------------------------------------
-	string& getFirstScene() {
-		return scenery.front();
+	const string& getFirstScene() const {
+		return checkpoints.front();
 	}
 
 	//--------------------------------------------------------------------------
 	// return reference to last checkpoint description
 	//--------------------------------------------------------------------------
 	string& getLastScene() {
-		return scenery.back();
+		return checkpoints.back();
+	}
+
+
+	//--------------------------------------------------------------------------
+	// return distance to next checkpoint
+	//--------------------------------------------------------------------------
+	float getNextDistance() {
+		return distances.at(distanceIndex++);
 	}
 
 	//--------------------------------------------------------------------------

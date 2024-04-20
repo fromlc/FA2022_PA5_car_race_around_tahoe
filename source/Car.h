@@ -58,5 +58,8 @@ public:
 
 	// returns number of miles remaining given fuel level
 	float canDriveMiles() const;
+
+	// pretty print year, make, model, odometer reading, fuel level, MPG
+	void print() const;
 };
 #endif	// CAR_H
