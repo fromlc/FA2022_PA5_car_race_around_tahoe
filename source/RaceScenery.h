@@ -76,14 +76,14 @@ public:
 	RaceScenery() {
 		sceneIndex = 0;
 		distanceIndex = 0;
-		srand((unsigned int) time(0));
+		srand(static_cast<unsigned int>(time(0)));
 	}
 
 	//--------------------------------------------------------------------------
 	// return number of scenes in vector
 	//--------------------------------------------------------------------------
 	int getSceneCount() const {
-		return (int) checkpoints.size();
+		return static_cast<int>(checkpoints.size());
 	}
 
 	//--------------------------------------------------------------------------
