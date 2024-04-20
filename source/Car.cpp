@@ -1,14 +1,13 @@
 //------------------------------------------------------------------------------
 // Car : class definition
 //------------------------------------------------------------------------------
-#include <iostream>
 #include <string>
 
-#include "Odometer.h"
-#include "FuelGauge.h"
 #include "Car.h"
 
-using std::cout;
+//------------------------------------------------------------------------------
+// using symbols
+//------------------------------------------------------------------------------
 using std::string;
 
 //------------------------------------------------------------------------------
@@ -23,6 +22,36 @@ Car::Car(const string& year, const string& make, const string& model) {
 	this->year = year;
 	this->make = make;
 	this->model = model;
+	this->description = year + " " + make + " " + model;
+}
+
+//------------------------------------------------------------------------------
+// return car's make
+//------------------------------------------------------------------------------
+const string& Car::getMake() const { return make; }
+
+//------------------------------------------------------------------------------
+// returns car's model
+//------------------------------------------------------------------------------
+const string& Car::getModel() const { return model; }
+
+//------------------------------------------------------------------------------
+// returns car's year
+//------------------------------------------------------------------------------
+const string& Car::getYear() const { return year; }
+//------------------------------------------------------------------------------
+// pretty print car description
+// derived class version will override this virtual function
+//------------------------------------------------------------------------------
+string& Car::getDescription() {
+	return description;
+}
+
+//------------------------------------------------------------------------------
+// returns number of miles on Tripmeter
+//------------------------------------------------------------------------------
+float Car::getMilesDriven() const {
+	return odo.getTripMiles();
 }
 
 //------------------------------------------------------------------------------
@@ -42,7 +71,7 @@ float Car::addFuel(float gallons) {
 //------------------------------------------------------------------------------
 // returns number of fuel gallons remaining
 //------------------------------------------------------------------------------
-float Car::readFuelGauge() { return fg.getGallonsLeft(); }
+float Car::readFuelGauge() const { return fg.getGallonsLeft(); }
 
 //------------------------------------------------------------------------------
 // returns number of miles remaining given fuel level
@@ -52,7 +81,7 @@ float Car::canDriveMiles() { return fg.canDriveMiles(); }
 //------------------------------------------------------------------------------
 // pretty print year, make, model, odometer reading, fuel level, MPG
 //------------------------------------------------------------------------------
-void Car::print() const {
+void Car::print() {
 	cout << "\n" << year << " " << make << " " << model << "\n";
 }
 

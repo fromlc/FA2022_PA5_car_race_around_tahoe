@@ -17,17 +17,17 @@ FuelGauge::FuelGauge(float initialGallons) { gallonsLeft = initialGallons; }
 //------------------------------------------------------------------------------
 // return fuel economy (MPG)
 //------------------------------------------------------------------------------
-float FuelGauge::getMPG() { return MPG; }
+float FuelGauge::getMPG() const { return MPG; }
 
 //------------------------------------------------------------------------------
 // return tank capacity
 //------------------------------------------------------------------------------
-float FuelGauge::getTankCapacity() { return TANK_CAPACITY; }
+float FuelGauge::getTankCapacity() const { return TANK_CAPACITY; }
 
 //------------------------------------------------------------------------------
 // return how many gallons of fuel remain
 //------------------------------------------------------------------------------
-float FuelGauge::getGallonsLeft() { return gallonsLeft; }
+float FuelGauge::getGallonsLeft() const { return gallonsLeft; }
 
 //------------------------------------------------------------------------------
 // fill the tank, return how many gallons were added
@@ -66,7 +66,7 @@ float FuelGauge::useGallons(float gallons) {
 //------------------------------------------------------------------------------
 // return how many miles can be driven given remaining fuel
 //------------------------------------------------------------------------------
-float FuelGauge::canDriveMiles() {
+float FuelGauge::canDriveMiles() const {
 	return gallonsLeft * MPG;
 }
 

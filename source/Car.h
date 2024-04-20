@@ -6,26 +6,40 @@
 
 #include <string>
 
-#include "Odometer.h"
+#include "Tripmeter.h"
 #include "FuelGauge.h"
 
+//------------------------------------------------------------------------------
+// using symbols
+//------------------------------------------------------------------------------
 using std::string;
 
 //----------------------------------------------------------------------
-// Car
+// Car : abstract base class
 //----------------------------------------------------------------------
 class Car {
 protected:
 	string make;
 	string model;
 	string year;
-	Odometer odo;
+	string description;
+	Tripmeter odo;
 	FuelGauge fg;
 
 public:
 	// constructors
 	Car();
 	Car(const string& year, const string& make, const string& model);
+
+	// getters
+	const string& getMake() const;
+	const string& getModel() const;
+	const string& getYear() const;
+	// derived class getter will override this one
+	virtual string& getDescription();
+
+	// util
+	float getMilesDriven() const;
 
 	//----------------------------------------------------------------------
 	// causes Odomether mileage and FuelGauge gallonsLeft to change
@@ -40,15 +54,9 @@ public:
 	float addFuel(float gallons);
 
 	// returns number of gallons remaining
-	float readFuelGauge();
+	float readFuelGauge() const;
 
 	// returns number of miles remaining given fuel level
-	float canDriveMiles();
-
-	// pretty print year, make, model, odometer reading, fuel level, MPG
-	void print() const;
+	float canDriveMiles() const;
 };
 #endif	// CAR_H
-
-
-

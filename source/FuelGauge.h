@@ -20,16 +20,16 @@ public:
 	FuelGauge(float initialGallons);
 
 	// return fuel economy (MPG)
-	float getMPG();
+	float getMPG() const;
 
 	// return tank capacity
-	float getTankCapacity();
+	float getTankCapacity() const;
 
 	// return how many gallons of fuel remain
-	float getGallonsLeft();
+	float getGallonsLeft() const;
 
 	// return how many miles can be driven given remaining fuel
-	float canDriveMiles();
+	float canDriveMiles() const;
 
 	// return how many miles were driven given remaining fuel
 	float driveMiles(float miles);

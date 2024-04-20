@@ -2,15 +2,16 @@
 // RaceCar : derived class definition
 //------------------------------------------------------------------------------
 #include <cstdlib>
-#include <iostream>
+#include <ctime>
 #include <string>
 
-#include "Odometer.h"
-#include "FuelGauge.h"
 #include "RaceCar.h"
 
-using std::cout;
+//------------------------------------------------------------------------------
+// using symbols
+//------------------------------------------------------------------------------
 using std::rand;
+using std::srand;
 using std::string;
 
 //------------------------------------------------------------------------------
@@ -25,7 +26,7 @@ RaceCar::RaceCar(const string& year, const string& make, const string& model) :
 	Car(year, make, model) {
 
 	srand((unsigned int) time(0));
-	speed = rand() % (MAX_SPEED - MIN_SPEED) + MIN_SPEED;
+	reset();
 }
 
 //------------------------------------------------------------------------------
@@ -34,7 +35,7 @@ RaceCar::RaceCar(const string& year, const string& make, const string& model) :
 //------------------------------------------------------------------------------
 float RaceCar::drive(float miles) {
 	float driven = fg.driveMiles(miles);
-	odo.addMilesDriven(driven);
+	odo.addTripMiles(driven);
 
 	return driven;
 }
@@ -45,6 +46,7 @@ float RaceCar::drive(float miles) {
 //------------------------------------------------------------------------------
 void RaceCar::setSpeed(int speed) {
 	this->speed = speed;
+	speedLog.push_back(speed);
 }
 
 //------------------------------------------------------------------------------
@@ -52,7 +54,10 @@ void RaceCar::setSpeed(int speed) {
 // returns miles actually driven given fuel remaining
 //------------------------------------------------------------------------------
 int RaceCar::setRandomSpeed(int minSpeed, int maxSpeed) {
-	speed = rand() % (maxSpeed - minSpeed) + minSpeed;
+	int range = maxSpeed - minSpeed + 1;
+	speed = rand() % range + minSpeed;
+	speedLog.push_back(speed);
+
 	return speed;
 }
 
@@ -61,4 +66,41 @@ int RaceCar::setRandomSpeed(int minSpeed, int maxSpeed) {
 //------------------------------------------------------------------------------
 int RaceCar::getSpeed() const {
 	return speed;
+}
+
+//------------------------------------------------------------------------------
+// sets crash flag
+//------------------------------------------------------------------------------
+void RaceCar::setCrash() {
+	crash = true;
+}
+
+//------------------------------------------------------------------------------
+// returns crash flag
+//------------------------------------------------------------------------------
+bool RaceCar::getCrash() const {
+	return crash;
+}
+
+//------------------------------------------------------------------------------
+// returns average speed
+//------------------------------------------------------------------------------
+float RaceCar::getAverageSpeed() {
+	int accumulateSpeed = 0;
+	for (int s : speedLog) {
+		accumulateSpeed += s;
+	}
+	return (float) accumulateSpeed / (float) speedLog.size();
+}
+
+//------------------------------------------------------------------------------
+// resets car data
+//------------------------------------------------------------------------------
+void RaceCar::reset() {
+	odo.reset();
+	crash = false;
+	speedLog.clear();
+
+	speed = rand() % (MAX_SPEED - MIN_SPEED + 1) + MIN_SPEED;
+	speedLog.push_back(speed);
 }
